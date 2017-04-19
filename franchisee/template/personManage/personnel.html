@@ -1,0 +1,37 @@
+<!--创建管理员、人员管理-->
+<ion-view cache-view="true" can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">人员管理</h1>
+    </div>
+    <ion-content class="has-header laundry">
+
+        <div class="examine-default" ng-if="views.managerList.length === 0 && views.isRequest">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                组件团队，与伙伴们一起奋斗吧！
+            </p>
+            <div class="default-operation">
+                <button class="button button-small button-positive" ng-click="views.detail()">立即创建</button>
+            </div>
+        </div>
+
+        <div class="laundry-principal" ng-if="views.managerList.length > 0 && views.isRequest">
+            <a class="btn" ng-click="views.detail()" href="javascript:;"><i class="ion-plus"></i>创建管理人员</a>
+        </div>
+
+        <ion-list can-swipe="true" class="my-canswipe" ng-if="views.managerList.length > 0 && views.isRequest">
+            <ion-item class="item-person item-remove-animate transparent-animation" ng-click="views.detail(item)"
+                      ng-repeat="item in views.managerList track by $index">
+                <a class="left">{{item.name}}</a><i class="ion-ios-arrow-right icon"></i>
+
+                <ion-option-button class="btn-remove"
+                                   ng-click="views.remove(item, $index, $event)">
+                    <!--<i class="swipe-icon close-icon"></i>-->
+                    <i class="icon ion-trash-a"></i>
+                </ion-option-button>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

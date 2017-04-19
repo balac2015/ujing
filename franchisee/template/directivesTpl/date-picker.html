@@ -1,0 +1,10 @@
+<ion-modal-view class="time-modal" style="top: 60%;">
+    <ion-content>
+        <div class="row time-btn-group">
+            <button tabindex="0" role="button" class="col time-show-btn" ng-click="views.closeModal('cancel')">取消</button>
+            <button tabindex="0" role="button" class="col time-show-btn" ng-click="views.closeModal('sure')">确定</button>
+        </div>
+        <div weight-pick value="views.timeStart" class="time-pick" max-value="views.maxValue"></div>
+        <!--<div weight-pick value="views.timeEnd" class="time-pick" max-value="views.maxValue"></div>-->
+    </ion-content>
+</ion-modal-view>

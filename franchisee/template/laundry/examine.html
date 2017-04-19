@@ -1,0 +1,51 @@
+<!--设备列表（单个洗衣房下设备、审核）examine-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="goBack()"></a>
+        <h1 class="title">{{views.title}}</h1>
+        <a href="javascript:;" class="button button-icon ion-ios-copy-outline operation" ng-click="views.goStoreDetail()"></a>
+    </div>
+    <ion-content class="has-header laundry" delegate-handle="mainScroll">
+
+        <!--审核、新建缺省-->
+        <div class="examine-default" ng-if="views.deviceList.length === 0 && views.isRequest">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                {{views.examineTip}}
+            </p>
+            <div class="default-operation" ng-if="views.isExamine">
+                <button class="button button-small button-positive" ng-click="views.goDevice('')">立即添加</button>
+            </div>
+        </div>
+
+        <!--审核通过、有数据-->
+       <div class="approved" ng-repeat="item in views.deviceList track by $index" ng-if="!views.isEmpty && views.isRequest">
+            <a href="javascript:;" class="item" ng-click="views.selectDevice($index)">
+                <i class="an-icon" ng-class="{'an-return-icon': $index !== views.selectDeviceIndex}"></i>{{item[0].deviceTypeId.shortName}}<span class="item-note">{{item.length + '台'}}</span>
+            </a>
+            <ul class="list" ng-if="$index === views.selectDeviceIndex && item.length > 0">
+                <li class="item row" ng-repeat="subItem in item track by $index">
+                    <div class="item-no">
+                        <span class="no">NO.</span>
+                        <span class="num">{{subItem.no}}</span>
+                    </div>
+                    <div class="item-content">
+                        <h3 class="title">{{subItem.deviceTypeId.shortName}}
+                            <!--状态 0:空闲  1:工作;2故障；3停用，4离线
+-->
+                            <span class="status free" ng-if="subItem.status == 0">空闲</span>
+                            <span class="status work" ng-if="subItem.status == 1">工作</span>
+                            <span class="status warning" ng-if="subItem.status == 2">故障</span>
+                            <span class="status offline" ng-if="subItem.status == 3">停用</span>
+                            <span class="status offline" ng-if="subItem.status == 4">离线</span>
+                        </h3>
+                        <p class="description">
+                            <i class="ion-ios-clock-outline icon"></i>{{subItem.statusUpdateTime | formattime}}投入使用
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </ion-content>
+</ion-view>

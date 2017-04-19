@@ -1,0 +1,35 @@
+<ion-view can-swipe-back="false" class="my-device">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back text-left" ng-click="exit()"></a>
+        <h1 class="title">我的设备</h1>
+        <a class="search-icon back text-right" ng-click="stateGo('myDeviceSearch')"></a>
+    </div>
+
+
+
+    <ion-content scrollbar-y="true" delegate-handle="myScroll">
+        <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.refresh()"></ion-refresher>
+
+        <ion-tabs class="row relative device-nav">
+            <ion-tab title="<span class='device-data'><span class='work'>{{views.nWorking}}</span><br/>工作</span>" on-select="views.tabsToggle('working')"></ion-tab>
+            <ion-tab title="<span class='device-data'><span class='free'>{{views.nFree}}</span><br/>空闲</span>" on-select="views.tabsToggle('free')"></ion-tab>
+            <ion-tab title="<span class='device-data'><span class='fault'>{{views.nError}}</span><br/>故障</span>" on-select="views.tabsToggle('error')"></ion-tab>
+            <ion-tab title="<span class='device-data'><span class='disable'>{{views.nDisabled}}</span><br/>停用</span>" on-select="views.tabsToggle('disabled')"></ion-tab>
+        </ion-tabs>
+
+        <div class="device-has-tab">
+            <section class="my-device-list transparent-animation" ng-repeat="list in views.deviceList track by $index">
+                <div class="list-title row" ng-class="{'border-bottom': $index !== views.selectDeviceIndex}" ng-click="views.selectDevice($index)">
+                    <p class="col col-80 no-p no-m">
+                        <i class="an-icon" ng-class="{'an-return-icon': $index === views.selectDeviceIndex}"></i>{{list.storeName}}
+                    </p>
+                    <p class="col col-20 no-p no-m text-right">{{list.deviceList.length + '台'}}</p>
+                </div>
+                <laundry-device-list device-list="list.deviceList" on-select="views.onSelect()" refresh="views.refresh()" ng-if="$index === views.selectDeviceIndex"></laundry-device-list>
+            </section>
+        </div>
+
+
+        <not-data-tips class="vertical-center" ng-if="views.deviceList.length === 0 && views.isRequest"></not-data-tips>
+    </ion-content>
+</ion-view>

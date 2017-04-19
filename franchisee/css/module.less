@@ -1,0 +1,382 @@
+/*ionic 中组件重置样式、directivesTpl 中模板样式*/
+@color-11c: #11c1f3;
+
+// 审核通过模板样式
+.approved {
+    > .item {
+        .set(height, 88);
+        .padding-a(0, 30);
+        border-color: @color-ded;
+        .fs(28);
+        .set(line-height, 88);
+        color: @font-color-29;
+    }
+    .ion-play {
+        .margin-r(14);
+        color: @color-ded;
+    }
+    .item-note {
+        .fs(24);
+        color: @font-6a6a;
+    }
+
+    .list {
+        background-color: @white;
+        .item {
+            .set(height, 146);
+            .padding-t(30);
+            .margin-l(30);
+            border-left-width: 0;
+
+            .item-no {
+                position: relative;
+                .padding-t(12);
+                .padding-l(30);
+                .col-15;
+
+                .no {
+                    position: absolute;
+                    .set(top, -18);
+                    left: 0;
+                    .fs(18);
+                    color: @font-6a6a;
+                }
+                .num {
+                    .fs(64);
+                    color: @font-6a6a;
+                }
+            }
+            .item-content {
+                .padding-l(20);
+                .col-85;
+
+                .title {
+                    .margin-b(12);
+                    .fs(32);
+                    color: @font-color-29;
+
+                    .status {
+                        display: inline-block;
+                        .padding-a(4);
+                        .margin-l(6);
+                        .set(border-radius, 2);
+                        .fs(24);
+                        color: @white;
+
+                        &.free {
+                            background-color: @color-23b;
+                        }
+                        &.work {
+                            background-color: @title-green;
+                        }
+                        &.fault {
+                            background-color: @color-35b;
+                        }
+                    }
+                }
+                .description {
+                    .fs(24);
+                    line-height: 1;
+                    color: @font-6a6a;
+
+                    .icon {
+                        .margin-r(12);
+                    }
+                }
+            }
+            &:last-child {
+                border-bottom-width: 0;
+            }
+        }
+    }
+
+}
+
+// 活动详情中模板样式
+.range-checkbox {
+    max-height: 100%;
+    .padding-l(0);
+    border-width: 0;
+
+    .checkbox {
+        right: 0;
+        left: auto;
+    }
+    .checkbox-square .checkbox-icon:before {
+        border-radius: 100%;
+    }
+}
+
+// $ionicModal 兼容 IOS 样式（U券活动详情的限用范围）
+.ionic-modal {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @bg-base;
+
+    .item-checkbox .checkbox {
+        left: auto!important;
+    }
+}
+.modal-backdrop-bg {
+    background-color: rgba(0,0,0,.16);
+}
+/* ------------------ 指令器 weightPick 样式 ---------- */
+.time-modal {
+    top: 60%!important;
+    bottom: 0;
+    left: 0;
+    width: 100%!important;
+
+    .scroll {
+        .set(top, 80);
+        .margin-t(-10);
+
+
+    }
+    .time-btn-group {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        .set(height, 80);
+        .padding-a(0);
+        .set(line-height, 80);
+        background-color: @bg-base;
+
+        .time-show-btn {
+            .padding-a(0);
+            border-width: 0;
+            .fs(28);
+            color: @title-blue;
+            background-color: transparent;
+
+            &.activated {
+                background-color: @color-activated;
+            }
+            &:first-child {
+                .padding-l(30);
+                text-align: left;
+            }
+            &:last-child {
+                .padding-r(30);
+                text-align: right;
+            }
+        }
+    }
+    .time-pick {
+        position: relative;
+        .set(top, 80);
+    }
+    .dwc {
+        width: 100%;
+        .padding-t(0);
+        table {
+            width: 100%;
+            .dw-sel {
+                color: @black;
+                background-image: -webkit-linear-gradient(top,#d0d0d0,#d0d0d0,transparent,transparent),-webkit-linear-gradient(bottom,#d0d0d0,#d0d0d0,transparent,transparent);
+                background-image: linear-gradient(180deg,#d0d0d0,#d0d0d0,transparent,transparent),linear-gradient(0deg,#d0d0d0,#d0d0d0,transparent,transparent);
+                background-position: top, bottom;
+                background-size: 100% 1px;
+                background-repeat: no-repeat;
+            }
+            .dw-li.dw-v {
+                .set(height, 80);
+                .set(line-height, 80);
+            }
+        }
+    }
+    .dwwol {
+        display: block;
+        width: 80%;
+        left: 10%;
+        .set(height, 80); // 行高为 80
+        .margin-t(-40);
+        border-color: @color-387;
+
+        background-image: -webkit-linear-gradient(top,#d0d0d0,#d0d0d0,transparent,transparent),-webkit-linear-gradient(bottom,#d0d0d0,#d0d0d0,transparent,transparent);
+        background-image: linear-gradient(180deg,#d0d0d0,#d0d0d0,transparent,transparent),linear-gradient(0deg,#d0d0d0,#d0d0d0,transparent,transparent);
+        background-position: top,bottom;
+        background-size: 100% 1px;
+        background-repeat: no-repeat;
+    }
+    .dwwo {
+        background-image: -webkit-linear-gradient(180deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.45)), -webkit-linear-gradient(0deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.45));
+        background-image: linear-gradient(180deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.45)), linear-gradient(0deg,hsla(0,0%,100%,.95),hsla(0,0%,100%,.45));
+        background-position: top, bottom;
+        background-size: 100% 102px;
+        background-repeat: no-repeat;
+    }
+}
+
+/* ------------------ 年、月、日滑动器样式 ---------- */
+.date-modal {
+    top: 100%;
+    bottom: 0;
+    width: 100%;
+    .set(height, 380);
+    .margin-t(-380);
+
+    .btn-handler {
+        display: -webkit-flex;
+        display: flex;
+        .set(height, 80);
+        align-items: center;
+        align-content: center;
+        background-color: @bg-base;
+    }
+    .date-btn {
+        flex-grow: 1;
+        height: 100%;
+        border-width: 0;
+        .fs(28);
+        color: @title-blue;
+        background-color: transparent;
+
+        &.activated {
+            background-color: @color-activated;
+        }
+        &:first-child {
+            .padding-l(30);
+            text-align: left;
+        }
+        &:last-child {
+            .padding-r(30);
+            text-align: right;
+        }
+    }
+
+    .dwc {
+        width: 100%;
+        .padding-t(30);
+
+        table {
+            width: 100%;
+        }
+    }
+    .dwwol {
+        display: block;
+        width: 80%;
+        left: 10%;
+        .set(height, 80); // 行高为 80
+        .margin-t(-40);
+        border-color: @color-387;
+
+        background-image: -webkit-linear-gradient(top,#d0d0d0,#d0d0d0,transparent,transparent),-webkit-linear-gradient(bottom,#d0d0d0,#d0d0d0,transparent,transparent);
+        background-image: linear-gradient(180deg,#d0d0d0,#d0d0d0,transparent,transparent),linear-gradient(0deg,#d0d0d0,#d0d0d0,transparent,transparent);
+        background-position: top,bottom;
+        background-size: 100% 1px;
+        background-repeat: no-repeat;
+    }
+    .dwi {
+        margin: 0;
+    }
+    .dwwr {
+        padding: 0;
+    }
+}
+
+.mask-modal {
+    position: fixed;
+    z-index: 0;
+    .set(top, 88);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0,.16);
+
+    .work-state-time {
+        top: 0!important;
+    }
+    .date-modal {
+        position: absolute;
+        animation: fadeInUp .5s;
+    }
+}
+
+.platform-ios .mask-modal .date-modal {
+    //.date-handler {
+    //    height: 100%;
+    //}
+    //.dwwl.dwrc {
+    //    height: 100%;
+    //    background-color: #abc;
+    //}
+    //.dw-trans,
+    //.dwbg,
+    //.dwc,
+    //.dwwr,
+    //.dwrc,
+    //.dwc table {
+    //    width: 100%;
+    //    height: 100%;
+    //}
+    //.dwsc .dww {
+    //    position: absolute;
+    //    top: 0;
+    //}
+    //.dw-li.dw-v {
+    //    .setI(font-size, 32);
+    //}
+    //.dwsc .dww {
+    //    .setI(height, 240);
+    //}
+    //.dw-bf .dw-li.dw-v {
+    //    .setI(height, 80);
+    //    .setI(line-height, 80);
+    //    .dw-i {
+    //        .fs(48);
+    //    }
+    //}
+}
+
+/* ------------------ 指令器 shrinkSelect 样式 ---------- */
+.parent-list {
+    .parent-item {
+        .parent-content {}
+
+        &.parent-level {
+            padding: 0;
+        }
+    }
+    .parent-level {
+        padding: 0;
+        .child-list {
+            .child-item {
+                .child-content {
+                    .padding-l(30);
+                }
+            }
+        }
+    }
+
+}
+.level1-icon {
+    display: inline-block;
+    .relative;
+    .set(top, 2);
+    .margin-r(30);
+    .set(width, 23);
+    .set(height, 32);
+    background: url("../images/list_icon.png") no-repeat center center;
+    background-size: contain;
+}
+/*----------------------新增洗衣房时间滚轮------------------*/
+.store-edit {
+    top: 0 !important;
+    .dwwo {
+        background-size: 100% 100px !important;
+    }
+    .date-modal {
+        .setI(height, 380);
+        .setI(margin-top, -540);
+    }
+    .dwc {
+        table {
+            .dw-sel {
+                background-size: 100% 0!important;
+            }
+        }
+    }
+}

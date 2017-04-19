@@ -1,0 +1,17 @@
+<!--常见问题-->
+<ion-view can-swipe-back="false" cache-view="true">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">常见问题</h1>
+    </div>
+    <ion-content class="question-view" scrollbar-y="false" has-bouncing="false">
+        <div class="item" ng-repeat="item in views.questionList track by $index" ng-click="views.showList($index)">
+            <div class="row">
+                <div class="col">{{item.question}}</div>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+            <div class="description" ng-if="$index === views.showIndex" ng-bind-html="item.answer"></div>
+        </div>
+        <!--<button class="question-btn" ng-click="views.jumpFeedback()">我要反馈</button>-->
+    </ion-content>
+</ion-view>

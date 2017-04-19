@@ -1,0 +1,22 @@
+{
+    "dependencies":{},
+    "hidden":false,
+    "autoDownload":true,
+    "relatesTo":[],
+    "dependsOn":[],
+    "dependsTo":[],
+    "releaseNote":"MSD",
+    "build":1,
+    "tplPath":"angular/template-co",
+    "parentFolder":"media-laundry",
+    "appFolder":"franchisee",
+    "name":"U净加盟商",
+    "identifier":"com.midea.msd.Franchisee",
+    "localPath":"",
+    "action":"",
+    "index":"index.html",
+    "isPcTest":0,
+    "isDebug":1,
+    "version":"1.0.1",
+    "testVersion":"0.1.43"
+}

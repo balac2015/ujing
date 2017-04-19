@@ -1,0 +1,126 @@
+<ion-view ng-click="views.isShowLaundry = false;" can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">经营统计</h1>
+        <a href="javascript:;" class="button button-icon icon-calendar" ng-click="views.showMask()"></a>
+    </div>
+    <ion-content class="has-header statistics" scrollbar-y="false" delegate-handle="small">
+        <p class="text-line">
+            时间：{{views.startSelected}} <span>至</span> {{views.endSelected}}
+        </p>
+
+        <div class="stat-box">
+            <div class="title">
+                实际收入（元）
+                <span class="num">{{(views.statisticsData.realIncomes || 0) | digital}}</span>
+            </div>
+            <div class="row amount">
+                <div class="col total">
+                    总收入额（元）
+                    <span class="num">{{(views.statisticsData.totalIncomes || 0) | digital}}</span>
+                </div>
+                <div class="col refund">
+                    退款额（元）
+                    <span class="num">{{(views.statisticsData.refund || 0) | digital}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="stat-box no-p-left">
+            <div class="title p-left-30">
+                总订单数（单）
+                <span class="num">{{views.statisticsData.totalOrders}}</span>
+            </div>
+            <div class="row graph">
+                <div class="col relative text-center">
+                    <show-circle cname="0" width="80%" height="80%" border="6" process="views.statisticsData.activeOrders" colorstart="7fe192" colorend="24caba"></show-circle>
+
+                    <div class="effective">有效</div><span class="num">{{views.statisticsData.activeOrders || 0}}</span>
+                </div>
+                <div class="col relative text-center">
+                    <show-circle cname="0" width="80%" height="80%" border="6" process="views.statisticsData.paidOrders" colorstart="7fe192" colorend="24caba"></show-circle>
+
+                    <div class="have-pay">已支付</div><span class="num">{{views.statisticsData.paidOrders || 0}}</span>
+                </div>
+                <div class="col relative text-center">
+                    <show-circle cname="0" width="80%" height="80%" border="6" process="views.statisticsData.cancelOrders" colorstart="7fe192" colorend="24caba"></show-circle>
+
+                    <div class="back-single">退单</div><span class="num">{{views.statisticsData.cancelOrders || 0}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row details">
+            <span class="col">经营明细</span>
+            <label class="col detail-select">
+                <select name="detailSelect"
+                        ng-model="views.laundrySelected"
+                        ng-change="views.laundryChange(views.laundrySelected)"
+                        ng-options="option.name for option in views.laundryList">
+                    <option value="" label="------全部洗衣房------">------全部洗衣房------</option>
+                </select>
+            </label>
+        </div>
+
+        <ion-tabs class="details-tabs" scrollbar-y="true">
+            <ion-tab title="实际收入">
+                <ion-scroll class="details-content" zooming="false" direction="xy" scrollbar-x="false" delegate-handle="subSmall" has-bouncing="false">
+                    <div class="row details-header" style="width: 110%">
+                        <div class="col col-50">洗衣房</div>
+                        <div class="col col-20 text-center">实际收入</div>
+                        <div class="col col-20 text-center">总收入</div>
+                        <div class="col col-20 text-center">退款数</div>
+                    </div>
+                    <div class="row details-body" style="width: 110%" ng-repeat="item in views.statisticsList">
+                        <div class="col col-50">{{item.storeName}}</div>
+                        <div class="col col-20 text-center">{{item.income.realIncomes}}</div>
+                        <div class="col col-20 text-center">{{item.income.totalIncomes}}</div>
+                        <div class="col col-20 text-center">{{item.income.refund}}</div>
+                    </div>
+                    <div class="row" style="width: 110%" ng-if="views.statisticsList.length === 0">
+                        <div class="empty-data"></div>
+                    </div>
+                </ion-scroll>
+                <!--<a class="link" ng-if="!views.statisticsItem.storeName" href="javascript:;">查看更多 <i class="icon-more"></i></a>-->
+            </ion-tab>
+            <ion-tab title="有效订单">
+                <ion-scroll class="details-content" zooming="false" direction="xy" scrollbar-x="false" has-bouncing="false" delegate-handle="isScroll">
+                    <div class="row details-header" style="width: 140%">
+                        <div class="col" ng-repeat="item in ['洗衣房', '总订单数', '有效订单数', '已支付订单数', '退单数'] track by $index"
+                             ng-class="{true: 'col-50', false: ['col-20', 'text-center']}[$index === 0]">{{item}}</div>
+                    </div>
+                    <div class="row details-body" style="width: 140%" ng-repeat="item in  views.statisticsList">
+                        <div class="col col-50">{{item.storeName}}</div>
+                        <div class="col col-20 text-center">{{item.order.totalOrders}}</div>
+                        <div class="col col-20 text-center">{{item.order.activeOrders}}</div>
+                        <div class="col col-20 text-center">{{item.order.paidOrders}}</div>
+                        <div class="col col-20 text-center">{{item.order.cancelOrders}}</div>
+                    </div>
+                    <div class="empty-data" ng-if="views.statisticsList.length === 0"></div>
+                </ion-scroll>
+                <!--<a class="link" ng-if="!views.statisticsItem.storeName" href="javascript:;">查看更多 <i class="icon-more"></i></a>-->
+            </ion-tab>
+        </ion-tabs>
+    </ion-content>
+    <div class="mask-modal" ng-if="views.isShowMask" ng-click="views.closeMash()">
+        <div class="work-state-time row no-p" ng-click="$event.stopPropagation()">
+            <div class="col col-15 no-p work-state-bg"></div>
+            <div class="col col-85 no-p">
+                <a class="start-time pt-15 pb-15 bor-bot over-hide pr-10 dis-block" ng-click="views.chooseDatePicker('start')">
+                    <span class="fl">开始时间</span>
+                    <span class="fr ion-ios-arrow-right famil">{{views.startSelected}}</span>
+                </a>
+                <a class="end-time pt-15 pb-15 over-hide pr-10 dis-block" ng-click="views.chooseDatePicker('end')">
+                    <span class="fl">结束时间</span>
+                    <span class="fr ion-ios-arrow-right famil">{{views.endSelected}}</span>
+                </a>
+            </div>
+        </div>
+        <div class="date-modal" ng-if="views.isShowDate" ng-click="$event.stopPropagation()">
+            <div class="btn-handler">
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('cancel')">取消</button>
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('sure')">确定</button>
+            </div>
+            <div date-pick class="date-handler" ng-if="views.startDatePicker" min-and-max-date="views.minAndMaxDate" value="views.startDate" default-value="views.startSelected"></div>
+            <div date-pick class="date-handler" ng-if="views.endDatePicker" min-and-max-date="views.minAndMaxDate" value="views.endDate" default-value="views.endSelected"></div>
+        </div>
+    </div>
+</ion-view>

@@ -1,0 +1,112 @@
+<!--洗衣房信息-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="views.onCancel()"></a>
+        <h1 class="title">定价</h1>
+        <a href="javascript:;" class="button button-icon operation" ng-if="views.isHandler" ng-click="views.onHandler()">{{views.handlerText}}</a>
+    </div>
+    <ion-content class="has-header laundry" delegate-handle="mainScroll">
+
+        <div class="examine-default" ng-if="views.laundryList.length === 0 && views.isRequest">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                新建洗衣房后才能定价！
+            </p>
+            <div class="default-operation">
+                <button class="button button-small button-positive" ng-click="stateGo('laundry')">立即新建</button>
+            </div>
+        </div>
+
+        <div class="info-line-group" ng-if="views.laundryList.length > 0 && views.isRequest">
+
+            <p class="nav-title">
+                <a ng-click="views.myLaundry()">我的洗衣店</a>
+
+                <i class="ion-ios-arrow-right" ng-if="views.storeName"></i>
+                <a ng-click="">{{views.storeName}}</a>
+            </p>
+
+            <form class="laundryLimit" name="laundryLimit">
+                <div class="info-line-group">
+                    <!--洗衣模式：value 对象、value.shortName，value.checked，无图标-->
+                    <ion-list class="parent-list">
+                        <ion-item class="parent-item" ng-class="{'parent-level': list.storeList.length > 0}"
+                                  ng-repeat="list in views.laundryList track by $index"
+                                  ng-click="views.onDropDown($index, list)">
+
+                            <div class="parent-content" ng-class="{'item': list.storeList.length > 0}">
+                                <i class="level1-icon"></i>{{list.serviceSubjectName}}
+                                <ion-checkbox class="range-checkbox change-label" ng-model="list.checked"
+                                              ng-click="views.onSelectedAll(list, $event)"></ion-checkbox>
+                            </div>
+
+                            <ion-list class="child-list" ng-if="list.storeList.length > 0 && $index === views.isSelectedIndex">
+                                <ion-item class="child-item" ng-class="{'gary': item.approveStatus != '02'}" ng-repeat="(index, item) in list.storeList track by index" ng-click="views.onSubChoose($event, list, item, 'noCheckbox')">
+                                    <div class="child-content">
+                                        <i class="icon-child"></i>{{item.name}}
+                                        <span class="small-font" ng-if="item.approveStatus != '02'">（正在审核中……）</span>
+                                        <ion-checkbox class="range-checkbox change-label"
+                                                      ng-if="item.approveStatus == '02'"
+                                                      ng-model="item.checked"
+                                                      ng-click="views.onSubChoose($event, list, item)"></ion-checkbox>
+                                    </div>
+                                </ion-item>
+                            </ion-list>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </form>
+        </div>
+
+        <div name="priceForm" ng-if="views.isShowPrice">
+            <ul class="pricing-tabs row">
+                <li class="col" ng-repeat="item in views.deviceType track by $index">
+                    <a class="device-item" ng-class="{'active': views.showDeviceTypeId === item._id}" href="javascript:;" ng-click="views.selectPriceTab(item._id)">{{item.shortName}}</a>
+                </li>
+            </ul>
+            <!--定价表单-->
+            <form class="laundry-price" name="priceForm">
+                <fieldset class="form-list">
+                    <div class="title">设定原价（元）</div>
+                    <div class="form-item" ng-if="item.deviceTypeId._id == views.showDeviceTypeId" ng-repeat="item in views.deviceWashModel track by $index">
+                        <label class="row form-item-text">
+                            <span class="col-20 label">{{item.workmodel || item.deviceWashModelId.workmodel}}：</span>
+                            <input class="input" type="number" placeholder="0" name="oDehydration" ng-model="item.washPrice" min="0" required/>
+                        </label>
+                    </div>
+                </fieldset>
+                <fieldset class="form-list">
+                    <div class="title">设定促销价（元）</div>
+                    <div class="form-item" ng-if="item.deviceTypeId._id == views.showDeviceTypeId" ng-repeat="item in views.deviceWashModel track by $index">
+                        <label class="row form-item-text">
+                            <span class="col-20 label">{{item.workmodel || item.deviceWashModelId.workmodel}}：</span>
+                            <input class="input" type="number" placeholder="0" name="sDehydration" ng-model="item.promotionPrice" min="0"/>
+                        </label>
+                    </div>
+
+                    <div class="time">
+                        <a class="start" ng-click="views.chooseDatePicker('start')">
+                            开始时间：{{views.startSelected}}
+                        </a>
+                        <a class="end" ng-click="views.chooseDatePicker('end')">
+                            结束时间：{{views.endSelected}}
+                        </a>
+                    </div>
+                </fieldset>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-positive" ng-click="views.priceSubmit(priceForm)">保存</button>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+    <div class="mask-modal" ng-if="views.isShowMask" ng-click="views.closeMash()">
+        <div class="date-modal" ng-click="$event.stopPropagation()">
+            <div class="btn-handler">
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('cancel')">取消</button>
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('sure')">确定</button>
+            </div>
+            <div date-pick ng-if="views.startDatePicker" value="views.startDate" default-value="views.startDefault"></div>
+            <div date-pick ng-if="views.endDatePicker" value="views.endDate" default-value="views.endDefault"></div>
+        </div>
+    </div>
+</ion-view>

@@ -1,0 +1,20 @@
+<!--服务主体列表 laundry-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">洗衣店</h1>
+    </div>
+    <ion-content class="has-header laundry">
+        <div class="laundry-principal" ng-if="!views.isManager">
+            <a class="btn" ng-click="stateGo('laundryEdit')" href="javascript:;"><i class="ion-plus"></i>创建服务主体</a>
+        </div>
+        <a class="laundry-list transparent-animation" ng-repeat="item in views.principalList track by $index" ng-click="views.goStore(item)">
+            <i class="ion-ios-location-outline icon"></i>
+            <span class="list-con">
+                <strong class="title">{{item.name}}</strong>
+                <span class="description">{{item.address}}</span>
+            </span>
+            <i class="ion-ios-arrow-right icon arrow-right"></i>
+        </a>
+    </ion-content>
+</ion-view>

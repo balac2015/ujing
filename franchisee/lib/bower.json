@@ -1,0 +1,50 @@
+{
+  "name": "nodejs-bower",
+  "description": "nodejs-bower",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "*.md",
+    "test",
+    "Gruntfile.js",
+    "gulpfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": "1.10.2",
+    "angular": "1.3.13",
+    "angular-route": "1.3.13",
+    "angular-cookies": "1.3.13",
+    "angular-loader": "1.3.13",
+    "angular-animate": "1.3.13",
+    "angular-messages": "1.3.13",
+    "angular-mocks": "1.3.13",
+    "angular-resource": "1.3.13",
+    "angular-sanitize": "1.3.13",
+    "angular-touch": "1.3.13",
+    "angular-ui-router": "0.2.13",
+    "angular-translate": "2.7.0",
+    "angular-translate-loader-static-files": "2.7.0",
+    "angular-swipe": "0.0.9",
+    "angular-loading-bar": "0.7.1",
+    "iscroll": "5.1.3",
+    "ng-iScroll": "*",
+    "collide": "1.0.0-beta.3",
+    "animate.css": "3.2.5",
+    "requirejs": "2.1.17",
+    "ionic": "1.0.1",
+    "less": "2.5.0",
+    "jasmine": "2.3.4"
+  },
+  "moduleType": [
+    "amd",
+    "node"
+  ],
+  "resolutions": {
+    "angular": "1.3.13"
+  }
+}

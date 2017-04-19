@@ -1,0 +1,19 @@
+<!--过期活动-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="goBack()"></a>
+        <h1 class="title">过期活动</h1>
+    </div>
+    <ion-content class="has-header laundry">
+
+        <div class="laundry-list expired-list" ng-repeat="item in views.couponList track by $index">
+            <span class="list-con">
+                <strong class="title">{{item.title}}</strong>
+                <span class="description">仅限{{item.description}}使用，限APP端使用。</span>
+                <span class="description">派券时间：{{item.activityStartTime}} 至 {{item.activityEndTime}}。</span>
+            </span>
+            <span class="validity">有效期限{{item.effectiveDays}}天</span>
+        </div>
+    </ion-content>
+    <not-data-tips ng-if="views.isShowNotDataTips"></not-data-tips>
+</ion-view>

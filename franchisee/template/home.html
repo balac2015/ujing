@@ -1,0 +1,24 @@
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <h1 class="title" ng-click="views.userLogin()">加盟商登陆</h1>
+    </div>
+    <ion-content class="has-header laundry" delegate-handle="mainScroll">
+
+        <line-text>
+            <span>cookie：</span>
+            <input type="text" ng-model="views.cookie" style="width: 100%;">
+        </line-text>
+        <div class="text-center">
+            <a class="button" ng-click="views.setCookie()" style="min-height: 26px; line-height: 26px; margin-top: 5px; background: gainsboro;">设置 cookie </a>
+        </div>
+        <a class="button button-block button-positive" ng-click="stateGo('message')">消息管理</a>
+        <a class="button button-block button-positive" ng-click="stateGo('personnel')">人员管理</a>
+        <a class="button button-block button-positive" ng-click="stateGo('myDevice')">我的设备</a>
+        <a class="button button-block button-positive" ng-click="stateGo('setDevice')">增加设备</a>
+        <a class="button button-block button-positive" ng-click="stateGo('laundry')">洗衣房</a>
+        <a class="button button-block button-positive" ng-click="stateGo('statistics')">经营统计</a>
+        <a class="button button-block button-positive" ng-click="stateGo('orderManage')">订单管理</a>
+        <a class="button button-block button-positive" ng-click="stateGo('pricing')">定价</a>
+        <a class="button button-block button-positive" ng-click="stateGo('coupon')">U券</a>
+    </ion-content>
+</ion-view>

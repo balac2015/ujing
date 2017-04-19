@@ -1,0 +1,48 @@
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon back text-left" ng-click="exit()">取消</a>
+        <h1 class="title">添加设备</h1>
+    </div>
+    <ion-content class="has-header laundry" scrollbar-y="false">
+        <div class="examine-default" ng-if="views.isRequest && !views.isStore">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                还没有新建的洗衣房喔！
+            </p>
+            <div class="default-operation">
+                <button class="button button-small button-positive" ng-click="views.routerGo('laundry')">立即添加洗衣房</button>
+            </div>
+        </div>
+
+        <form ng-if="views.isRequest && views.isStore" class="setdevice-form">
+            <div class="line-row-group">
+                <div class="line-row row">
+                    <div class="col">设备编号：</div>
+                    <input class="col" type="text" maxlength="3" ng-pattern="/^[0-9]*$/" ng-model="views.no" placeholder="设备编号"/>
+                </div>
+                <div class="line-row" ng-click="views.routerGo('shrink', 'device')">
+                    <div class="col-label">设备类型：</div>
+                    <span class="col-text">{{views.deviceName}}</span>
+                    <i class="icon-right-arrow"></i>
+                </div>
+                <div class="line-row" ng-click="views.routerGo('shrink', 'store')">
+                    <div class="col-label">洗衣房：</div>
+                    <span class="col-text nowrap">{{views.storeName}}</span>
+                    <i class="icon-right-arrow"></i>
+                </div>
+                <div class="line-row" ng-click="views.scanning()">
+                    <div class="col-label">扫码洗衣二维码：</div>
+                    <span class="col-text">{{views.isStart ? '已录入' : '未录入'}}</span>
+                    <i class="icon-right-arrow"></i>
+                </div>
+                <div class="line-row" ng-click="views.onSelect('laundry')">
+                    <ion-toggle ng-model="views.isSupportScan"class="my-toggle" toggle-class="toggle-large">是否支持扫码自洁：</ion-toggle>
+                </div>
+
+            </div>
+            <div class="padding">
+                <button class="button button-block button-positive" ng-click="views.registerDevice()">确定添加</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

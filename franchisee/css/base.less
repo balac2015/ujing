@@ -1,0 +1,206 @@
+@c-red: #f00;
+@c-white: #fff;
+@bg-c-grey: #f2f2f2;
+@border-c-grey: #e4e4e4;
+@f-simhei: "simhei";
+@f-simsun: "simsun";
+
+/* public classes */
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: @f-simhei;
+    background-color: #eff0f5;
+    -webkit-overflow-scroll: touch;
+}
+*{ font-family: @f-simhei !important; }
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover { text-decoration: none !important; }
+ul,
+ol,
+li,
+dt,
+dd { list-style: none; }
+.dis-in-b{ display: inline-block; }
+.dis-block{ display: block; }
+.no-p { padding: 0 !important; }
+.no-m { margin: 0; }
+.no-border { border: none !important; }
+.svg-inc {
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 0 !important;
+    visibility:hidden !important;
+}
+.fs-12 {
+    font-size: 12px !important;
+}
+.fs-13 {
+    font-size: 13px !important;
+}
+.fs-14 {
+    font-size: 14px !important;
+}
+.fs-15 {
+    font-size: 15px !important;
+}
+.fs-16 {
+    font-size: 16px !important;
+}
+.fs-17 {
+    font-size: 17px !important;
+}
+.fs-18 {
+    font-size: 18px !important;
+}
+.c-white {
+    color: @c-white;
+}
+.bg-white { background: @c-white; }
+
+.item-icon-left {
+    padding-left: 46px !important;
+}
+
+/*覆盖actionSheet样式*/
+.platform-android .action-sheet-backdrop.active{
+    background-color: rgba(0,0,0,.4);
+}
+.platform-android .action-sheet{
+    margin-left: 8px;
+    margin-right: 8px;
+    width: auto;
+    z-index: 11;
+}
+.platform-android .action-sheet .action-sheet-title,.platform-android .action-sheet .button{
+    display: block;
+    padding: 1px;
+    width: 100%;
+    border-radius: 0;
+    border-color: #d1d3d6;
+    background-color: transparent;
+    color: #007aff;
+    font-size: 21px;
+    text-align:center;
+}
+.platform-android .action-sheet .action-sheet-title{
+
+}
+.platform-android .action-sheet .button.activated,.platform-android .action-sheet .button.active {
+
+}
+.platform-android .action-sheet-group {
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.platform-android .action-sheet-cancel {
+    display:block;
+    font-weight: 500;
+}
+.platform-android .action-sheet-group {
+    .set(border-radius, 24);
+}
+.action-sheet-group {
+    .setI(border-radius, 24);
+}
+.top-92 {
+    .set(top, 92);
+}
+// 重构 ionci Popup 样式，cssClass="ionic-popup"
+.ionic-popup {  // 遮罩层
+    .popup {    // 弹框
+         background-color: @c-white;
+        .set(border-top-left-radius, 24);
+        .set(border-top-right-radius, 24);
+        .set(border-bottom-left-radius, 24);
+        .set(border-bottom-right-radius, 24);
+    }
+    .popup-head {   // 弹框 - 头
+        //.set(border-top-left-radius, 12);
+        //.set(border-top-right-radius, 12);
+        .padding-v(0);
+        .padding-t(36);
+        border-bottom-width: 0;
+        .fs(36);
+        .color(@font-color-29);
+        .popup-title {
+            .margin-v(0);
+        }
+    }
+    .popup-body {
+        .padding-v(30);
+        .fs(28);
+        .color(@font-color-29);
+        .set(border-top-left-radius, 24);
+        .set(border-top-right-radius, 24);
+        background-color: @c-white;
+        text-align: center;
+
+        .tem-title {
+            font-weight: bold;
+        }
+        .tem-content {
+            .margin-t(10);
+        }
+    }
+    .popup-buttons {
+        .set(min-height, 80);
+        .padding-a(0);
+        .fs(36);
+        .button {
+            .margin-r(0);
+            border-width: 0;
+            .border-t;
+            .fs(36);
+            color: @blue-11c;
+            background-color: @c-white;
+            &:after {
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+            &:first-child {
+                .border-r;
+                .set(border-bottom-left-radius, 24);
+            }
+            &:last-child {
+                font-weight: 500;
+                border-right-width: 0;
+                .set(border-bottom-right-radius, 24);
+            }
+        }
+        .activated {
+            color: @blue-11c;
+            background-color: @c-white;
+        }
+    }
+}
+/*------溢出隐藏------*/
+.nowrap {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+textarea {
+    -webkit-appearance: none;
+}

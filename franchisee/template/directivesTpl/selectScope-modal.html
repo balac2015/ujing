@@ -1,0 +1,18 @@
+<!--被 select-limit 替代，待删-->
+<div class="modal ionic-modal">
+    <ion-content>
+        <div class="info-line-group">
+            <div class="info-line full" ng-if=" temp.isProgress ">
+                <a href="javascript:;" class="link" ng-click="">U净</a> &gt;
+                <a href="javascript:;" class="link" ng-click="">洗衣店</a> &gt;
+                洗衣房
+            </div>
+            <div class="info-line" ng-repeat="item in temp.selectList track by $index">
+                <ion-checkbox class="range-checkbox" ng-model=" item.checked " ng-checked=" item.checked ">{{ item.text }}</ion-checkbox>
+            </div>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click=" temp.onSelectedItem() ">选择</button>
+        </div>
+    </ion-content>
+</div>

@@ -1,0 +1,351 @@
+/*加盟商公用样式*/
+/*-----------------颜色区域---------start*/
+@black: #000;
+@white: #fff;
+@c-base: @white;
+@bg-base: @white;
+@default-bg: #eff0f5;
+@title-green: #6dce6f;
+@title-less-green: #23c0b1;
+@title-blue: #35bbf8;
+@title-purple: #7686de;
+@fs-color: #29292d;
+@border-color: #dedee0;
+@title-blue: #347aeb;
+@btn-b9b: #b9babf;
+@btn-aa8: #aa87e5;
+@btn-768: #7686de;
+@font-6a6a: #6a6a6a;
+@font-6969: #696969;
+@btn-eb8: #eb85ca;
+@font-color-29: #29292d;
+@blue-11c: #007aff;
+@input-grey: #c1c8be;
+@font-333: #333;
+@font-666: #666;
+@bg-red: red;
+/*-----------------颜色区域---------end*/
+
+.color(@color: @c-base) {
+    color: @color;
+}
+.bg(@background-color: @bg-base) {
+    background-color: @background-color;
+}
+
+// px(设计稿)转px(根据dpr计算后),用于固定大小、不随屏幕缩放的元素，如常见的字体大小
+.set(@name, @px){
+    @{name}: round(@px / 2) * 1px;
+    [data-dpr="2"] & {
+        @{name}: @px * 1px;
+    }
+    [data-dpr="3"] & {
+        @{name}: round(@px / 2 * 3) * 1px;
+    }
+}
+
+.setI(@name, @px){
+    @{name}: round(@px / 2) * 1px!important;
+    [data-dpr="2"] & {
+        @{name}: @px * 1px!important;
+    }
+    [data-dpr="3"] & {
+        @{name}: round(@px / 2 * 3) * 1px!important;
+    }
+}
+
+.fs(@px){
+    .set(font-size, @px);
+}
+.border-t(@color: @border-base, @style: solid, @width: 1px) {
+    border-top: @width @style @color;
+}
+.border-r(@color: @border-base, @style: solid, @width: 1px) {
+    border-right: @width @style @color;
+}
+.border-b(@color: @border-base, @style: solid, @width: 1px) {
+    border-bottom: @width @style @color;
+}
+.border-l(@color: @border-base, @style: solid, @width: 1px) {
+    border-left: @width @style @color;
+}
+.border-h(@horizontal-color: @border-base, @style: solid, @width: 1px) {
+    border-right: @width @style @horizontal-color;
+    border-left: @width @style @horizontal-color;
+}
+.border-v(@vertical-color: @border-base, @style: solid, @width: 1px) {
+    border-top: @width @style @vertical-color;
+    border-bottom: @width @style @vertical-color;
+}
+.border-a(@color: @border-base, @style: solid, @width: 1px) {
+    border: @width @style @color;
+}
+
+.padding-t(@px) {
+    .set(padding-top, @px);
+}
+.padding-r(@px) {
+    .set(padding-right, @px);
+}
+.padding-b(@px) {
+    .set(padding-bottom, @px);
+}
+.padding-l(@px) {
+    .set(padding-left, @px);
+}
+.padding-h(@horizontal-right, @horizontal-left: @horizontal-right) {
+    .set(padding-right, @horizontal-right);
+    .set(padding-left, @horizontal-left);
+}
+.padding-v(@vertical-top, @vertical-bottom: @vertical-top) {
+    .set(padding-top, @vertical-top);
+    .set(padding-bottom, @vertical-bottom);
+}
+.padding-a(@top, @right: @top, @bottom: @top, @left: @right) {
+    .padding-t(@top);
+    .padding-r(@right);
+    .padding-b(@bottom);
+    .padding-l(@left);
+}
+
+.margin-t(@px) {
+    .set(margin-top, @px);
+}
+.margin-r(@px) {
+    .set(margin-right, @px);
+}
+.margin-b(@px) {
+    .set(margin-bottom, @px);
+}
+.margin-l(@px) {
+    .set(margin-left, @px);
+}
+.margin-h(@horizontal-right, @horizontal-left: @horizontal-right) {
+    .set(margin-right, @horizontal-right);
+    .set(margin-left, @horizontal-left);
+}
+.margin-v(@vertical-top, @vertical-bottom: @vertical-top) {
+    .set(margin-top, @vertical-top);
+    .set(margin-bottom, @vertical-bottom);
+}
+.margin-a(@top, @right: @top, @bottom: @top, @left: @right) { // 同时设置 4 个
+    .margin-t(@top);
+    .margin-r(@right);
+    .margin-b(@bottom);
+    .margin-l(@left);
+}
+
+
+.text-left {
+    text-align: left !important;
+}
+.text-center {
+    text-align: center !important;
+}
+.text-right {
+    text-align: right !important;
+}
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+.fixed {
+    position: fixed;
+}
+
+// 超行文本溢出隐藏，@line-num 行数
+.only-has-text(@line-num: 1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: @line-num;
+    -webkit-box-orient: vertical;
+}
+
+.header-grandient {
+    @gradient-top1: #2c70f5;
+    @granient-bottom1: #3f80f6;
+    background: @gradient-top1;
+    background: -webkit-linear-gradient(top, @gradient-top1, @granient-bottom1);
+    background: -o-linear-gradient(top, @gradient-top1, @granient-bottom1);
+    background: -moz-linear-gradient(top, @gradient-top1, @granient-bottom1);
+    background: linear-gradient(top, @gradient-top1, @granient-bottom1);
+}
+.comm-header {
+    .header-grandient;
+
+    .back {
+        .color;
+        text-align: left;
+    }
+    .title {
+        .padding-h(34);
+        .color;
+    }
+    .operation {
+        .color;
+        text-align: right;
+    }
+}
+.pt-20 {
+    .padding-t(20);
+}
+.bg-white {
+    .bg(@c-white);
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.fl-l {
+    float: left;
+}
+.fl-r {
+    float: right;
+}
+.no-border {
+    border: none !important;
+}
+.border-top {
+    .border-t(@border-color);
+}
+.no-border-top {
+    border-top: none !important;
+}
+/*ng-repeat动画*/
+.transparent-animation.ng-enter {
+    -webkit-animation: fadeIn .5s;
+    animation: fadeIn .5s;
+}
+.only-has-one-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+// 小三角形图标
+.an-icon {
+    display: inline-block;
+    .margin-r(30);
+    .set(width, 20);
+    .set(height, 15);
+    -webkit-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    background: url("../images/an_icon.png") no-repeat center center;
+    background-size: contain;
+
+    &.an-return-icon {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+}
+.no-m {
+    margin: 0 !important;
+}
+.no-border-top {
+    border-top: none !important;
+}
+/*----------- 没有数据提示 start-------------*/
+.not-data-tips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    .set(width, 200);
+    .margin-t(-150);
+    .margin-l(-100);
+    .fs(24);
+    color: #666;
+    text-align: center;
+    -webkit-transition: translate(-50%, -50%);
+    -moz-transition: translate(-50%, -50%);
+    -ms-transition: translate(-50%, -50%);
+    -o-transition: translate(-50%, -50%);
+    transition: translate(-50%, -50%);
+    .tips-img {
+        margin: 0 auto;
+        display: block;
+        .set(margin-bottom, 20);
+        .set(width, 168);
+        .set(height, 168);
+        background: transparent url('../images/not_data_tips.png') no-repeat center center;
+        background-size: 100% 100%;
+    }
+}
+
+.top-tip {
+    position: fixed;
+    z-index: 999999;
+    padding: 0;
+    .set(padding-left, 8);
+    .set(padding-right, 8);
+    top: 50%;
+    left: 50% !important;
+    width: auto;
+    height: auto;
+    .set(min-width, 100);
+    max-width: 80%;
+    color: #fff;
+    background: rgba(0, 0, 0, .7);
+    text-align: center;
+    .set(font-size, 26);
+    .set(line-height, 48);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    .set(-webkit-border-radius, 6);
+    .set(border-radius, 6);
+    -webkit-animation: fadeIn .4s;
+}
+.top-tip.ng-leave {
+    -webkit-animation: fadeOut .4s;
+}
+
+
+// 兼容 android
+.platform-android {
+}
+
+// 兼容 ios
+.platform-ios {
+    /*------------ 头部兼容 start ------------*/
+    .comm-header.bar {
+       .setI(height, 128);
+       .title {
+           .setI(top, 40);
+       }
+       .button-icon {
+           .setI(margin-top, 40);
+       }
+       .search-icon {
+           .setI(margin-top, 20);
+       }
+   }
+    .my-device {
+        .device-nav {
+            .set(top, 124);
+        }
+        .scroll-content {
+            //.set(top, 338);
+        }
+        .device-has-tab {
+            .margin-t(128);
+        }
+    }
+    .search-block {
+        .setI(top, 128);
+    }
+    .has-header {
+        .set(top, 128);
+    }
+    .comm-header.bar {
+        .icon-calendar {
+            .setI(margin-top, 56);
+        }
+    }
+    .mask-modal {
+        .setI(top, 88);
+    }
+}
+

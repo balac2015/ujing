@@ -1,0 +1,23 @@
+<ion-modal-view class="set-device">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back text-left" ng-click="temp.hideModal()"></a>
+        <h1 class="title">设备设置</h1>
+    </div>
+    <ion-content>
+        <div class="device-info">
+            <p>ID：{{temp.device._id}}</p>
+            <p>SN码：{{temp.device.sn}}</p>
+            <p>设备类型：{{temp.device.deviceTypeId.shortName}}</p>
+        </div>
+        <form>
+            <div class="device-form">
+                <label class="device-line">
+                    <span class="label">编号：</span>
+                    <input class="text" type="text" ng-model="temp.device.no" placeholder="洗衣机自编号"/>
+                </label>
+                <ion-toggle ng-model="temp.isEnable"class="my-toggle" toggle-class="toggle-large">停用设备：</ion-toggle>
+            </div>
+            <button class="button my-button" ng-click="temp.onSubmit(temp.device)">确定</button>
+        </form>
+    </ion-content>
+</ion-modal-view>

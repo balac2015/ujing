@@ -1,0 +1,40 @@
+ <!--消息中心-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">消息中心</h1>
+        <a href="javascript:;" class="button button-icon operation ng-hide" ng-click="views.onItemEdit()" ng-show="views.messageList.length !== 0">{{views.isShowDelete ? '取消' : '编辑'}}</a>
+    </div>
+    <ion-content class="has-header message" delegate-handle="small">
+        <ion-list show-delete="views.isShowDelete">
+            <ion-item class="item-remove-animate" ng-repeat="item in views.messageList track by $index" ng-if="item">
+                <div class="message-list">
+                    <div class="row">
+                        <strong class="col message-type">{{item.title}}</strong>
+                        <span class="col message-time">{{item.createTime | date:'mm-dd hh:mm'}}</span>
+                    </div>
+                    <div class="message-content" ng-bind-html="item.content">
+                       <!-- <img src="images/1.png" alt=""/>
+                        <p>...</p>-->
+                        <!--{{ item.content }}-->
+                    </div>
+                    <a class="row link-line" ng-click="stateGo('myDevice')">
+                        <span class="col-90 link">去处理</span>
+                        <i class="icon-arrow-right"></i>
+                    </a>
+                </div>
+                <ion-delete-button ng-class="{'ion-ios-circle-outline': item.checked === false || item.checked === undefined, 'ion-checkmark-circled': item.checked === true}"
+                                   ng-click="views.onItemSelect($index)">
+                </ion-delete-button>
+            </ion-item>
+
+            <div ng-class="{'hasBottomBtn': views.isShowDelete, 'bottomSpear': !views.isShowDelete}"></div>
+        </ion-list>
+        <ion-infinite-scroll ng-if="views.isNotMoreData" icon="ion-loading-c" on-infinite="views.loadMoreData()"></ion-infinite-scroll>
+    </ion-content>
+    <div class="bar bar-footer message-btn" ng-if="views.isShowDelete">
+        <button class="btn" ng-click=" views.onItemAllSelect() ">全不选/全选</button>
+        <button class="btn" ng-click=" views.onItemDelete() ">删除</button>
+    </div>
+    <not-data-tips ng-if="views.messageList.length === 0 && views.isRequestSucc"></not-data-tips>
+</ion-view>

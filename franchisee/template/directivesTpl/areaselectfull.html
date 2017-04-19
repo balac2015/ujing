@@ -1,0 +1,18 @@
+<div class="bar bar-header comm-header">
+    <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="close()"></a>
+    <h1 class="title">省份查询</h1>
+</div>
+<ion-scroll class="content has-header" style="height:auto; background-color: #fff" id="selectList" delegate-handle="selectList">
+    <ion-list>
+        <ion-item class="transparent-animation" ng-class="{'icon-right': item.cities.length}" ng-repeat="item in areaData track by $index"
+                  ng-click="pClick(item)">
+            {{item.name}}
+        </ion-item>
+    </ion-list>
+</ion-scroll>
+<div class="mask has-header" ng-click="closeRightScroll()" ng-if="ctrl.showCity"></div>
+<ion-scroll class="content city-select has-header" style="height:auto;" ng-if="ctrl.showCity" delegate-handle="selectList2" ng-swipe-right="ctrl.showCity = false">
+    <ion-list>
+        <ion-item class="transparent-animation" ng-repeat="item in cList track by $index" ng-click="cClick(item)">{{item.name}}</ion-item>
+    </ion-list>
+</ion-scroll>

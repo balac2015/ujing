@@ -1,0 +1,18 @@
+<!-- 此模板模拟搜索页的输入状态和搜索状态 -->
+<ion-content class="has-header search-bg">
+    <!-- 当未提交搜索时submitted = false，根据关键词输入状态的改变提供搜索建议 -->
+    <!--<ul class="list" ng-if="!submitted">-->
+    <!--&lt;!&ndash; 点击搜索建议进行操作，可以立即进行搜索或进行其他逻辑 &ndash;&gt;-->
+    <!--<li class="item" ng-repeat="item in searchData" ng-if="item.keyword.indexOf(searchText) != -1 || item.result.indexOf(searchText) != -1" ng-click="search(item.keyword)">-->
+    <!--{{item.keyword}}-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!-- 当提交搜索时submitted = true(searching是模拟提交的一个状态)，得到搜索结果 -->
+    <ul class="list">
+        <li class="item no-point" ng-repeat="item in searchData track by $index"
+            ng-click="selectSearch(item, $index)">
+            {{item.name}}
+        </li>
+    </ul>
+    <!--<wash-list send-data="item" click-fun="selectSearch(item)" ng-repeat="item in searchData track by $index"></wash-list>-->
+</ion-content>

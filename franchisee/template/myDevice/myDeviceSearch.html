@@ -1,0 +1,33 @@
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back text-left" ng-click="goBack()"></a>
+        <h1 class="title">搜索</h1>
+    </div>
+
+    <ion-content class="has-header" scrollbar-y="false" delegate-handle="mainScroll">
+        <p class="nav-title">
+            <a class="link" ng-click="views.onLaundry()">我的洗衣店</a>
+            <i class="ion-ios-arrow-right" ng-if="views.laundryName !== ''"></i>
+            <a class="link" ng-if="views.laundryName !== ''" ng-click="views.deviceList.length = 0">{{views.laundryName}}</a>
+
+            <i class="ion-ios-arrow-right" ng-if="views.deviceList.length > 0"></i>
+            <span ng-if="views.deviceList.length > 0">{{views.laundryItem}}</span>
+        </p>
+
+        <!--服务主体列表-->
+        <ion-list class="search-list" ng-if="views.deviceList.length === 0" ng-repeat="list in views.laundryList track by $index">
+            <ion-item class="search-item" ng-click="views.selectList($index, list.serviceSubjectName)">
+                <i class="list-icon"></i>{{list.serviceSubjectName}}
+            </ion-item>
+            <ion-list class="search-sublist" ng-class="{'active': views.listItemIndex === $index}" ng-if="views.listItemIndex === $index && list.storeList && list.storeList.length > 0">
+                <ion-item ng-repeat="item in list.storeList track by $index"
+                          ng-click="views.selectItem(item)">{{item.name}}</ion-item>
+            </ion-list>
+        </ion-list>
+
+        <!--设备列表-->
+        <laundry-device-list device-list="views.deviceList" ng-if="views.deviceList.length > 0" on-select="views.onSelect()"></laundry-device-list>
+        <div class="bottomSpear"></div>
+        <not-data-tips class="vertical-center" ng-if="!views.laundryList[0].serviceSubjectName && views.isRequest"></not-data-tips>
+    </ion-content>
+</ion-view>

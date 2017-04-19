@@ -1,0 +1,130 @@
+<!--洗衣房详情（可删除）storeDetail-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click=" goBack() "></a>
+        <h1 class="title">{{views.isEdit ? '新增洗衣房' : views.storeBind.title + '洗衣房'}}</h1>
+        <a href="javascript:;" class="button button-icon operation" ng-click="views.onRemove()" ng-if="!views.isEdit">删除</a>
+    </div>
+    <ion-content class="has-header laundry" has-bouncing="false">
+
+        <div class="line-text" ng-if="views.isEdit">
+            {{views.name}}
+        </div>
+        <div class="line-text" ng-if="!views.isEdit">
+            状态：<span class="show-text status-color">{{views.status || ''}}</span>
+        </div>
+
+        <form class="store-form">
+            <div class="info-add" ng-if="views.isEdit">
+                <div class="add-name">
+                    名称：
+                    <span class="switch">
+                        <a class="switch-item"
+                           ng-class="{'active': views.toggleIndex === 0}"
+                           ng-click="views.toggleSwitcher(0)" href="javascript:;">自定义</a>&nbsp;<span class="switch-item-center">或</span>&nbsp;<a class="switch-item"
+                                                                                                                                             ng-class="{'active': views.toggleIndex === 1}"
+                                                                                                                                             ng-click="views.toggleSwitcher(1)" href="javascript:;">层级</a>
+                    </span>
+                </div>
+                <div class="form-line">
+                    <div class="form-select row no-p" ng-if="views.toggleIndex === 1">
+                        <input class="name-item col col-33" type="text" ng-model="views.storeBind.title1" maxlength="30" placeholder="中山大学" />
+                        <input class="name-item col col-33" type="text" ng-model="views.storeBind.title2" maxlength="30" placeholder="8座" />
+                        <input class="name-item col col-30" type="text" ng-model="views.storeBind.title3" maxlength="30" placeholder="2楼" />
+                    </div>
+                    <input class="form-text" ng-if="views.toggleIndex === 0 " ng-model="views.storeBind.title" maxlength="50" type="text" placeholder="洗衣房名称"/>
+                    <span class="form-label">洗衣房</span>
+                </div>
+                <p class="add-address">经纬度：{{views.storeBind.coordinate}} <a href="javascript:" class="restart button button-positive" ng-click="views.locationMap()">获取定位</a></p>
+            </div>
+            <div class="line-text-group" ng-if="!views.isEdit"title>
+                <div class="line-text">
+                    <span>服务主体名称：</span>
+                    <span class="show-text">{{views.name}}</span>
+                </div>
+                <div class="style-line-full"></div>
+                <label class="line-text">
+                    <span>名称：</span>
+                    <input class="show-text" type="text" ng-model="views.storeBind.title"/>
+                </label>
+                <div class="style-line"></div>
+                <label class="line-text">
+                    <span>详细地址：</span>
+                    <input class="show-text" type="text" ng-model="views.storeBind.address"/>
+                </label>
+                <div class="style-line"></div>
+                <div class="line-text">
+                    <span>经纬度：</span>
+                    <input class="show-text" type="text" ng-model="views.storeBind.coordinate" ng-disabled="true">
+                    <span class="link" ng-click="views.locationMap()">重新获取</span>
+                </div>
+            </div>
+
+            <div class="shoping-time">
+                <i class="icon-time"></i>
+                <div class="line-time">
+                    <div class="start-time" ng-click="views.timeModalShow('businessStartTime')">
+                        <span>营业开始时间：</span>
+                        <span class="time-num">{{views.storeBind.businessStartTime | timeShop}}<i class="ion-ios-arrow-right"></i></span>
+                    </div>
+                    <div class="end-time" ng-click="views.timeModalShow('businessEndTime')">
+                        <span>营业结束时间：</span>
+                        <span class="time-num">{{views.storeBind.businessEndTime | timeShop}}<i class="ion-ios-arrow-right"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list item-tel">
+                <label class="item item-input">
+                    <span class="input-label">手机号码：</span>
+                    <input class="text" type="tel" maxlength="11" ng-model="views.storeBind.mobile"/>
+                </label>
+            </div>
+            <!--<div class="line-text">-->
+                <!--<span>手机号码：</span>-->
+                <!--<input class="show-text" type="tel" maxlength="11" ng-model="views.storeBind.mobile"/>-->
+            <!--</div>-->
+
+            <div class="line-text-group" ng-if="views.isEdit">
+               <!-- <div class="line-text">
+                    <span>提供服务设备：</span>
+                    <div class="show-text text-right">
+                        <label>
+                            <input type="radio" ng-model="views.storeBind.enable" ng-value="">洗衣机
+                        </label>
+                        <label>
+                            <input type="radio" ng-model="views.storeBind.enable" ng-value="">干衣机
+                        </label>
+                    </div>
+                </div>
+                <div class="style-line"></div>-->
+                <div class="line-text">
+                    <span>状态：</span>
+                    <div class="show-text text-right">
+                        <label ng-repeat="item in views.stateList track by $index">
+                            <input type="radio" name="laundryState"
+                                   ng-model="views.state"
+                                   ng-value="item.value"
+                                   ng-change="views.radioChange(item, views.state)" />{{item.text}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spacing-padding">
+                <input class="button-submit" type="button" value="保存" ng-click="views.updateStore()">
+            </div>
+        </form>
+    </ion-content>
+    <div class="mask-modal store-edit time-modal" ng-if="views.isShowMask" ng-click="views.timeModalHide($event, 'cancel')"> <!--ng-click="views.closeMash()"-->
+        <div class="date-modal" ng-click="$event.stopPropagation()">
+            <div class="row time-btn-group">
+                <button tabindex="0" role="button" class="col time-show-btn" ng-click="views.timeModalHide($event, 'cancel')">取消</button>
+                <button tabindex="0" role="button" class="col time-show-btn" ng-click="views.timeModalHide($event, 'sure')">确定</button>
+            </div>
+            <div weight-pick value="views.storeBind.businessStartTime" ng-if="!views.isTimeEnd" class="time-pick" max-value="views.maxValue"></div>
+            <div weight-pick value="views.storeBind.businessEndTime" ng-if="views.isTimeEnd" class="time-pick" max-value="views.maxValue"></div>
+        </div>
+    </div>
+</ion-view>
+

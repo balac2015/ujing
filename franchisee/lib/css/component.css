@@ -1,0 +1,493 @@
+/*
+ Allow angular.js to be loaded in body, hiding cloaked elements until
+ templates compile. The !important is important given that there may be
+ other selectors that are more specific or come later and might alter display.
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+.item {
+    -webkit-transform: translate3d(0, 0, 0);
+}
+.scroll-item {
+    -webkit-transform: translate3d(0, 0, 0);
+}
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-size: 1em;
+    font-family: "simHei";
+    background-color: #F2F2F2;
+    overflow: hidden !important;
+}
+/*头部ios兼容*/
+.bar {
+    height: 44px !important;
+}
+
+.bar .title {
+    margin-top: 0 !important;
+    height: 43px !important;
+}
+.bar a,
+.bar .button {
+    margin-top: 0 !important;
+}
+.has-header,
+.bar-subheader {
+    top: 43px !important;
+}
+.has-subheader {
+    top: 88px !important;
+}
+.header-return {
+    border: 0;
+    font-size: 16px !important;
+    line-height: 35px !important;
+}
+.header-title {
+    font-size: 18px !important;
+    font-family: "SimHei";
+}
+.main-view {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0 !important;
+    right: 0 !important;
+    overflow: hidden;
+}
+.content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, .3);
+}
+.pane, .view {
+    background: #F2F2F2;
+}
+/*loading-bar*/
+#loading-bar-spinner {
+    display: block;
+    position: fixed;
+    z-index: 10002;
+    top: 50% !important;
+    left: 50%!important;
+}
+#loading-bar-spinner .spinner-icon {
+    width: 14px;
+    height: 14px;
+    margin-top: -7px!important;
+    margin-left: -7px!important;
+    border:  solid 2px transparent;
+    border-top-color:  black!important;;
+    border-left-color: black!important;;
+    border-radius: 10px;
+}
+/* ======================= 切换开关 =========================*/
+.mc-switch {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 60px;
+    border: solid 1px #d9d9d9;
+    border-radius: 100px;
+    background-color: #fff;
+    animation-name: switch-off;
+    -webkit-animation-name: switch-off;
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+}
+.mc-switch .toggle {
+    position: absolute;
+    padding: 27%;
+    border: solid 1px #d9d9d9;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 2px 2px 2px 0 #adadad;
+    animation-name: toggle-off;
+    -webkit-animation-name: toggle-off;
+    animation-duration: 0.3s;
+    -webkit-animation-duration: 0.3s;
+}
+@media (max-width: 400px) {
+    .mc-switch {
+        width: 50px !important;
+        height: 30px !important;
+    }
+    .mc-switch .toggle {
+        padding: 26% !important;
+    }
+}
+@media (min-width: 400px) and (max-width: 640px) {
+    .mc-switch {
+        width: 75px !important;
+        height: 44px !important;
+    }
+}
+.mc-switch.active {
+    border-color: #0189dd;
+    background-color: #0189dd;
+    animation-name: switch-on;
+    -webkit-animation-name: switch-on;
+}
+.mc-switch.active .toggle {
+    left: 43%;
+    border-color: #fff;
+    box-shadow: 2px 2px 2px 0 #005b98;
+    animation-name: toggle-on;
+    -webkit-animation-name: toggle-on;
+}
+@keyframes switch-on {
+    from {
+        border-color: #d9d9d9;
+        background-color: #fff;
+    }
+    to {
+        border-color: #0189dd;
+        background-color: #0189dd;
+    }
+}
+@keyframes switch-off {
+    from {
+        border-color: #0189dd;
+        background-color: #0189dd;
+    }
+    to {
+        border-color: #d9d9d9;
+        background-color: #fff;
+    }
+}
+@-webkit-keyframes switch-on {
+    from {
+        border-color: #d9d9d9;
+        background-color: #fff;
+    }
+    to {
+        border-color: #0189dd;
+        background-color: #0189dd;
+    }
+}
+@-webkit-keyframes switch-off {
+    from {
+        border-color: #0189dd;
+        background-color: #0189dd;
+    }
+    to {
+        border-color: #d9d9d9;
+        background-color: #fff;
+    }
+}
+@keyframes toggle-on {
+    from {
+        border-color: #d9d9d9;
+        left: 1px;
+    }
+    to {
+        border-color: #fff;
+        left: 43%;
+    }
+}
+@keyframes toggle-off {
+    from {
+        border-color: #fff;
+        left: 43%;
+    }
+    to {
+        border-color: #d9d9d9;
+        left: 1px;
+    }
+}
+@-webkit-keyframes toggle-on {
+    from {
+        border-color: #d9d9d9;
+        left: 1px;
+    }
+    to {
+        border-color: #fff;
+        left: 43%;
+    }
+}
+@-webkit-keyframes toggle-off {
+    from {
+        border-color: #fff;
+        left: 43%;
+    }
+    to {
+        border-color: #d9d9d9;
+        left: 1px;
+    }
+}
+
+/* ============================= 选择页 ============================= */
+.mc-selector {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}
+.mc-selector-item {
+    padding: 0;
+    width: 100%;
+}
+.mc-selector-item li{
+    width: 100%;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #F2F2F2;
+    background-position: 95%;
+    background-repeat: no-repeat;
+}
+.mc-selector-item li:active {
+    background-color: #F2F2F2;
+}
+.mc-selector-item li.active {
+    background-image: url("../images/icon_select.png");
+}
+@media (max-width: 400px) {
+    .mc-selector-item li {
+        background-size: 20px;
+        padding: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+@media (min-width: 400px) and (max-width: 640px) {
+    .mc-selector-item li {
+        background-size: 30px;
+        padding: 15px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+}
+.index-bar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    background-color: #fff;
+}
+.index-bar p {
+    font: 3%/3.7% 'simhei';
+    color: #0085e0;
+}
+
+/****************************************** keyframes **************************************************/
+/**
+ * $keyframes \ gelatine
+ **/
+@keyframes gelatine {
+    from, to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+    25% {
+        -webkit-transform: scale(0.9, 1.1);
+        transform: scale(0.9, 1.1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.1, 0.9);
+        transform: scale(1.1, 0.9);
+    }
+
+    75% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+
+    from, to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+    25% {
+        -webkit-transform: scale(0.9, 1.1);
+        transform: scale(0.9, 1.1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.1, 0.9);
+        transform: scale(1.1, 0.9);
+    }
+
+    75% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+}
+@-webkit-keyframes gelatine {
+    from, to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+    25% {
+        -webkit-transform: scale(0.9, 1.1);
+        transform: scale(0.9, 1.1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.1, 0.9);
+        transform: scale(1.1, 0.9);
+    }
+
+    75% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+
+    from, to {
+        -webkit-transform: scale(1, 1);
+        transform: scale(1, 1);
+    }
+
+    25% {
+        -webkit-transform: scale(0.9, 1.1);
+        transform: scale(0.9, 1.1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.1, 0.9);
+        transform: scale(1.1, 0.9);
+    }
+
+    75% {
+        -webkit-transform: scale(0.95, 1.05);
+        transform: scale(0.95, 1.05);
+    }
+}
+.mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-animation-duration: .4s;
+    -webkit-animation-fill-mode: both;
+    -webkit-animation-name: fadeIn;
+}
+.mask.ng-leave,
+.mask.ng-hide {
+    -webkit-animation-name: fadeOut;
+}
+.content {
+    position: absolute;
+    top: 0;
+    right: 0 !important;
+    bottom: 0;
+    left: 0 !important;
+    overflow: hidden;
+}
+/* ============== 右侧滑出层 ============= */
+.popup-right {
+    position: fixed;
+    z-index: 15;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 1) 0 0 10px;
+    background-color: #ffffff;
+    overflow: hidden;
+    -webkit-transform: translate(100%, 0);
+    transform: translate(100%, 0);
+}
+/* =============== 折叠 ============== */
+.collapse {
+    display: none;
+    visibility: hidden;
+}
+.collapse.in {
+    display: block;
+    visibility: visible;
+}
+.collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition-timing-function: ease;
+    -o-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: .35s;
+    -o-transition-duration: .35s;
+    transition-duration: .35s;
+    -webkit-transition-property: height, visibility;
+    -o-transition-property: height, visibility;
+    transition-property: height, visibility;
+}
+/* ===================== top-tip ======================= */
+.top-tip {
+    position: fixed;
+    z-index: 999999;
+    top: 78%;
+    width: auto;
+    height: auto;
+    min-width: 100px;
+    max-width: 60%;
+    padding: 8px;
+    color: #fff;
+    background: rgba(0, 0, 0, .7);
+    text-align: center;
+    line-height: 16px;
+    border-radius: 0;
+    -webkit-animation: fadeIn .4s;
+}
+.top-tip.ng-leave {
+    -webkit-animation: fadeOut .4s;
+}
+/* ===================== range范围控制条 ===================== */
+.range-content {
+    position: relative;
+    height: 12px;
+    background-image: -webkit-linear-gradient(top, rgb(28,26,37), rgb(44,44,52));
+    border-radius: 6px;
+}
+.range-value {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    height: 12px;
+    background-image: -webkit-linear-gradient(left, #2b9dff, #03fed8);
+    border-radius: 6px;
+}
+.range-handle {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    margin-top: -8px;
+    margin-left: -14px;
+    background-image: -webkit-linear-gradient(top, #c2c1c6, #95949c);
+    border-radius: 50%;
+    box-shadow: 1px 2px 1px 1px rgba(0,0,0,.6);
+}
+.range-text {
+    position: absolute;
+    display: block;
+    top: -28px;
+    left: -10px;
+    width: 48px;
+    text-align: center;
+    color: #eeeeee;
+}

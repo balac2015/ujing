@@ -1,0 +1,31 @@
+<!--洗衣房列表（单个服务主体下洗衣房）store-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="views.routerBack()"></a>
+        <h1 class="title">{{views.name}}</h1>
+        <a href="javascript:;" ng-if="!views.isManager" class="button button-icon ion-ios-copy-outline back" ng-click="views.goLaundryDetail()"></a>
+    </div>
+    <ion-content class="has-header laundry">
+        <div class="laundry-principal">
+            <a class="btn" ng-click="stateGo('storeEdit')" href="javascript:;"><i class="ion-plus"></i>新增洗衣房</a>
+        </div>
+        <!--<a class="store-item" ng-repeat="item in views.detailList track by $index" ng-click="views.stateGo('examine', item, 'examine', $index)">-->
+        <a class="store-item" ng-repeat="item in views.detailList track by $index" ng-click="views.goDevice(item)">
+            <span class="approve-status">
+                <i class="status trial" ng-if="item.approveStatus == 2">通过</i>
+                <i class="status stop" ng-if="item.approveStatus == 3">不通过</i>
+                <i class="status wait" ng-if="item.approveStatus == 1">待审核</i>
+            </span>
+            <span class="store-info">
+                <strong class="title">{{item.name}}</strong>
+                <span class="description">{{item.address}}</span>
+                <span class="device">
+                    <span class="device-item"><i class="icon-wash"></i>洗衣机 {{item.washDeviceNum || 0}} 台</span>
+                    <span class="device-item"><i class="icon-dry"></i>干衣机 {{item.dryDeviceNum || 0}} 台</span>
+                </span>
+            </span>
+            <i class="ion-ios-arrow-right icon"></i>
+        </a>
+
+    </ion-content>
+</ion-view>

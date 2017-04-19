@@ -1,0 +1,20 @@
+<div class="approved">
+    <!--审核通过列表-->
+    <a href="javascript:;" class="item" ng-click=" toggle() ">
+        <i class="ion-play"></i>{{ itemData.title }}<span class="item-note">{{ itemData.num + '台'}}</span>
+    </a>
+    <ul class="list" ng-show=" showMe && itemData.num > 0">
+        <li class="item row" ng-repeat="subItem in itemData.subList track by $index">
+            <div class="item-no">
+                <span class="no">NO.</span>
+                <span class="num">{{ subItem.num }}</span>
+            </div>
+            <div class="item-content">
+                <h3 class="title">{{ subItem.title }}<span class="status" ng-class=" subItem.state ">{{ subItem.state === 'free' ? '空闲' : subItem.state === 'work' ? '工作' : '故障' }}</span></h3>
+                <p class="description">
+                    <i class="ion-ios-clock-outline icon"></i>{{ subItem.time + '投入使用' }}
+                </p>
+            </div>
+        </li>
+    </ul>
+</div>

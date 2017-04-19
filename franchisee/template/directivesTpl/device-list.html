@@ -1,0 +1,72 @@
+<ion-list can-swipe="true" class="my-canswipe">
+    <ion-item class="item-remove-animate list-content"
+              ng-repeat="item in deviceList track by $index">
+        <div class="con-left">
+            <span class="no">NO.</span>
+            <span class="num">{{item.no}}</span>
+        </div>
+        <div class="con-right">
+            <p class="type">{{item.deviceTypeId.shortName || ''}}</p>
+            <p class="tip">
+                <i class="status-icon" ng-class="{'free-icon': item.status == 0, 'working-icon': item.status == 1, 'error-icon': item.status == 2, 'disabled-icon': item.status == 3}"></i>
+                已{{item.status | deviceStatus}}{{item.statusUpdateTime | timeDiff}}小时
+            </p>
+        </div>
+
+        <!--停用功能 stop：工作、故障时-->
+        <ion-option-button class="button-unbundling"
+                           ng-if="item.status == 1 || item.status == 2"
+                           ng-click="views.stop(item)">
+            <i class="swipe-icon close-icon"></i>
+        </ion-option-button>
+
+        <!--解绑功能 unbindQrcode：空闲-->
+        <ion-option-button class="button-unbundling"
+                           ng-if="item.status == 0"
+                           ng-click="views.unbindQrcode(item, $index)">
+            <i class="swipe-icon unbundling-icon"></i>
+        </ion-option-button>
+
+        <!--扫码功能 bindQrcode：空闲-->
+        <ion-option-button class="button-scan"
+                           ng-if="item.status == 0"
+                           ng-click="views.bindQrcode(item)">
+            <i class="swipe-icon scan-icon"></i>
+        </ion-option-button>
+
+        <!--编辑功能 updateDeviceInfo：空闲-->
+        <ion-option-button class="button-edit"
+                           ng-if="item.status == 0"
+                           ng-click="views.updateDeviceInfo(item)">
+            <i class="swipe-icon edit-icon"></i>
+        </ion-option-button>
+
+        <!--启用功能：故障时-->
+        <ion-option-button class="button-play"
+                           ng-if="item.status == 2"
+                           ng-click="views.restart(item)">
+            <i class="swipe-icon play-icon"></i>
+        </ion-option-button>
+
+        <!--禁用功能：停用时-->
+        <ion-option-button class="button-scan"
+                           ng-if="item.status == 3"
+                           ng-click="views.disable(item)">
+            <i class="swipe-icon refresh-icon"></i>
+        </ion-option-button>
+
+        <!--打电话功能：故障时-->
+        <ion-option-button class="button-scan"
+                           ng-if="item.status == 2"
+                           ng-click="views.telAction(item)">
+            <i class="swipe-icon phone-icon"></i>
+        </ion-option-button>
+
+        <!--更多功能：故障（补偿，取消）、停用（解绑，扫一扫，编辑，取消）时-->
+        <ion-option-button class="button-edit"
+                           ng-if="item.status == 2 || item.status == 3"
+                           ng-click="views.moreAction(item)">
+            <i class="swipe-icon more-icon"></i>
+        </ion-option-button>
+    </ion-item>
+</ion-list>

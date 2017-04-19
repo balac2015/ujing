@@ -1,0 +1,65 @@
+<ion-view>
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="views.routerBack()"></a>
+        <h1 class="title">{{views.title}}</h1>
+    </div>
+    <ion-content class="has-header laundry" delegate-handle="mainScroll">
+
+        <div class="examine-default" ng-if="views.type === 'store' && views.shrinkList && views.shrinkList.length == 0">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                请先添加洗衣房，再进行操作！
+            </p>
+            <div class="default-operation">
+                <button class="button button-small button-positive" ng-click="stateGo('laundry')">去添加</button>
+            </div>
+        </div>
+
+        <form class="laundryLimit" name="laundryLimit">
+            <div class="info-line-group">
+                <ion-list class="parent-list" ng-if="views.level === 1">
+                    <ion-item class="parent-item" ng-class="{'parent-level': list.storeList.length > 0}"
+                              ng-repeat="list in views.shrinkList track by $index"
+                              ng-click="views.onSelected($index, list)">
+
+                        <div class="parent-content" ng-class="{item: list.storeList.length > 0}">
+                            <i class="{{views.level1Icon}}"></i>{{list.shortName}}
+                            <ion-checkbox class="range-checkbox change-label" ng-click="views.onSelected($index, list)" ng-model="list.checked"></ion-checkbox>
+                        </div>
+                    </ion-item>
+                </ion-list>
+
+                <!--洗衣模式：value 对象、value.shortName，value.checked，无图标-->
+                <ion-list class="parent-list" ng-if="views.level === 2">
+                    <ion-item class="parent-item" ng-class="{'parent-level': list.storeList.length > 0}"
+                              ng-repeat="list in views.shrinkList track by $index"
+                              ng-click="views.onDropDown($index, list)">
+
+                        <div class="parent-content" ng-class="{'item': list.storeList.length > 0}">
+                            <i class="level1-icon"></i>{{list.serviceSubjectName}}
+                            <ion-checkbox class="range-checkbox change-label" ng-if="views.select === 'checkbox'" ng-model="list.checked"
+                                          ng-click="views.onSelectedAll(list, $event)"></ion-checkbox>
+                        </div>
+
+                        <ion-list class="child-list" ng-if="list.storeList.length > 0 && $index === views.isSelectedIndex">
+                            <ion-item class="child-item" ng-class="{'gary': item.approveStatus != '02'}" ng-repeat="(index, item) in list.storeList track by index" ng-click="views.onSubChoose($event, list, item, 'noCheckbox')">
+                                <div class="child-content">
+                                    <i class="icon-child"></i>{{item.name}}
+                                    <span class="small-font" ng-if="item.approveStatus != '02'">（正在审核中……）</span>
+                                    <ion-checkbox class="range-checkbox change-label"
+                                                  ng-if="item.approveStatus == '02'"
+                                                  ng-model="item.checked"
+                                                  ng-click="views.onSubChoose($event, list, item)"></ion-checkbox>
+                                </div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-item>
+                </ion-list>
+            </div>
+
+            <div class="padding">
+                <button class="button button-block button-positive" ng-click="views.onSubmit()">选择</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

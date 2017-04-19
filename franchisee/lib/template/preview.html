@@ -1,0 +1,15 @@
+<div ng-if="!tpl">
+    <ion-scroll class="mask" delegate-handle="preview-handle" zooming="true" min-zoom="1" max-zoom="2" has-bouncing="true" direction="x" scrollbar-y="false" scrollbar-x="false">
+        <img style="width: 100%; height: auto;" ng-src="{{src}}">
+    </ion-scroll>    
+</div>
+<div class="text-center no-border no-m no-p" style="position: fixed; z-index: 99999; left: 0; bottom: 20px; width: 100%; " ng-if="!tpl && !btnsTpl && isShowBtns">
+    <button class="button no-border no-m no-p dis-in-b" style="color: white; background: #f79100; width: 45%;" ng-click="closePicture()">
+        返回
+    </button>
+    <button class="button no-border no-m no-p dis-in-b" style="color: white; background: #f79100; width: 45%;" ng-click="delPicture()">
+        删除
+    </button>
+</div>
+<div ng-include="btnsTpl" ng-if="!tpl && btnsTpl"></div>
+<div ng-include="tpl" ng-if="tpl"></div>

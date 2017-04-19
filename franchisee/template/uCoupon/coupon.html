@@ -1,0 +1,36 @@
+<!--分析领券活动-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="exit()"></a>
+        <h1 class="title">分享领券活动</h1>
+    </div>
+    <ion-content class="has-header laundry">
+
+        <!--<div class="examine-default" ng-if="true">
+            <div class="default-img"></div>
+            <p class="default-tip">
+                空空如夜，赶快给点福利大家吧！
+                新建的洗衣房后才能派券！
+            </p>
+            <div class="default-operation">
+                <button class="button button-small button-positive">立即派券/立即前往</button>
+            </div>
+        </div>-->
+
+        <div class="laundry-principal">
+            <a class="btn" ng-click="views.goRouter()" href="javascript:;"><i class="ion-plus"></i>创建活动</a>
+        </div>
+
+        <a class="laundry-list coupon-list transparent-animation" ng-repeat="item in views.couponList track by $index" ng-click="views.goRouter(item)">
+            <span class="list-con">
+                <strong class="title">{{item.title}}</strong>
+                <span class="description">仅限<span ng-repeat="store in item.stores track by $index">{{store.storeId.name + '洗衣房' + (!$last ? ',' : '')}}</span>使用，限APP端使用。</span>
+                <span class="description">派券时间：{{item.activityStartTime | date : 'yyyy-MM-dd'}} 至 {{item.activityEndTime | date : 'yyyy-MM-dd'}}。</span>
+            </span>
+            <span class="validity">有效期限{{item.effectiveDays}}天</span>
+        </a>
+
+        <p class="page-tip">没有更多活动了 <a class="link" href="javascript:;" ng-click="stateGo('expired')">查看过期活动》</a></p>
+
+    </ion-content>
+</ion-view>

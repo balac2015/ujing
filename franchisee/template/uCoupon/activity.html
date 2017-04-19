@@ -1,0 +1,55 @@
+<!--活动详情、创建活动-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click="goBack()"></a>
+        <h1 class="title">活动详情</h1>
+    </div>
+    <ion-content class="has-header laundry">
+        <form class="list activity-form" name="myform">
+            <div class="item-group">
+                <label class="item item-input">
+                    <span class="input-label">活动：</span>
+                    <input class="text" type="text" placeholder="请输入活动名称" ng-model="views.title" maxlength="20" ng-disabled=" !views.isEdit "/>
+                </label>
+                <label class="item item-input" ng-class="{'item-arrow': views.isEdit}" on-tap="views.goRouter('store')">
+                    <span class="input-label">限用范围：</span>
+                    <input class="text" type="text" placeholder="请选择限用范围" ng-model="views.storeName" disabled="false"
+                           ng-class="{'padding-r-15': !views.isEdit}"
+                    />
+                    <i class="icon-arrow-right"></i>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">折扣：</span>
+                    <input class="text" type="tel" placeholder="请输入折扣" ng-model="views.discount" maxlength="4" ng-disabled="!views.isEdit"/>
+                </label>
+            </div>
+            <label class="item item-input" ng-class="{'item-arrow': views.isEdit}" on-tap="views.chooseDatePicker('start')">
+                <span class="input-label">派券开始时间：</span>
+                <span class="text">{{views.startTime}}</span>
+                <i class="icon-arrow-right"></i>
+            </label>
+            <label class="item item-input" ng-class="{'item-arrow': views.isEdit}" on-tap="views.chooseDatePicker('end')">
+                <span class="input-label">派券结束时间：</span>
+                <span class="text">{{views.endTime}}</span>
+                <i class="icon-arrow-right"></i>
+            </label>
+            <label class="item item-input">
+                <span class="input-label">有效期：</span>
+                <input class="text" type="tel" placeholder="请输入有效天数" ng-model=" views.effectiveDays " maxlength="3" ng-disabled="!views.isEdit"/>
+            </label>
+            <div class="padding" ng-if="views.isEdit">
+                <button class="button button-block button-positive" ng-click="views.addCoupon()">创建</button>
+            </div>
+        </form>
+    </ion-content>
+    <div class="mask-modal" ng-if="views.isShowMask" ng-click="views.closeMash()">
+        <div class="date-modal" ng-click="$event.stopPropagation()">
+            <div class="btn-handler">
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('cancel')">取消</button>
+                <button tabindex="0" role="button" class="date-btn" ng-click="views.closeDatePicker('sure')">确定</button>
+            </div>
+            <div date-pick class="date-handler" ng-if="views.startDatePicker" value="views.startDate" default-value="views.startTime"></div>
+            <div date-pick class="date-handler" ng-if="views.endDatePicker" value="views.endDate" default-value="views.endTime"></div>
+        </div>
+    </div>
+</ion-view>

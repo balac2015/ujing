@@ -1,0 +1,87 @@
+<!--服务主体新建 laundryAdd-->
+<ion-view can-swipe-back="false">
+    <div class="bar bar-header comm-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left back" ng-click=" goBack() "></a>
+        <h1 class="title">{{views.laundryBind.title}}</h1>
+        <!--<a href="javascript:;" class="button button-icon operation" ng-click="views.onRemove()" ng-if="!views.isEdit">删除（测试用）</a>-->
+    </div>
+    <ion-content class="has-header laundry" has-bouncing="false">
+        <form class="laundry-form">
+            <div class="principal-attr">
+                <h3 class="title">添加主体属性</h3>
+                <div class="form-button">
+                    <button class="col col-25 fl-l transparent-animation"
+                            ng-repeat="item in views.switchList track by $index"
+                            ng-class=" {'active': views.switchIndex === $index} "
+                            ng-click=" views.switchTabs($index) ">{{item.name}}</button>
+                </div>
+            </div>
+
+            <!--修改后-->
+            <div class="list">
+                <label class="item item-input">
+                    <span class="col input-label">服务主体名称：</span>
+                    <input class="col text" type="text" placeholder="江南大学" ng-model="views.laundryBind.name" maxlength="20"/>
+                </label>
+                <div class="item-group">
+                    <label class="item item-input item-icon" ng-click="views.showArea()">
+                        <span class="col input-label">所在地区：</span>
+                        <div class="col text">{{views.laundryBind.area}}</div>
+                        <i class="ion-ios-arrow-right icon"></i>
+                    </label>
+                    <hr class="line-style">
+                    <label class="item item-input">
+                        <span class="col input-label">详细地址：</span>
+                        <input class="col text" type="text" placeholder="请输入详细地址" ng-model="views.laundryBind.address" maxlength="50"/>
+                    </label>
+                </div>
+                <div class="item-group">
+                    <label class="item item-input">
+                        <span class="col input-label">计划洗衣房数量：</span>
+                        <input class="col text" type="tel" placeholder="添加数量" ng-model="views.laundryBind.numLaundry" maxlength="6"/>
+                    </label>
+                    <hr class="line-style">
+                    <label class="item item-input">
+                        <span class="col input-label">计划设备数量：</span>
+                        <input class="col text" type="tel" placeholder="添加数量" ng-model="views.laundryBind.numEquipment" maxlength="6"/>
+                    </label>
+                </div>
+            </div>
+            <!--
+            <label class="line-text">
+                <span class="">服务主体名称：</span>
+                <input class="show-text" type="text" placeholder="江南大学" ng-model="views.laundryBind.name" maxlength="20"/>
+            </label>
+
+            <div class="line-text-group">
+                <label class="line-text" ng-click="views.showArea()">
+                    <span class="">所在地区：</span>
+                    <div class="show-text">{{views.laundryBind.area}}</div><i class="ion-ios-arrow-right icon"></i>
+                </label>
+                <div class="style-line"></div>
+                <label class="line-text">
+                    <span class="">详细地址：</span>
+                    <input class="show-text" type="text" placeholder="请输入详细地址" ng-model="views.laundryBind.address" maxlength="50"/>
+                </label>
+            </div>
+
+            <div class="line-text-group">
+                <label class="line-text">
+                    <span class="">计划洗衣房数量：</span>
+                    <input class="show-text" type="tel" placeholder="添加数量" ng-model="views.laundryBind.numLaundry" maxlength="6"/>
+                </label>
+                <div class="style-line"></div>
+                <label class="line-text">
+                    <span class="">计划设备数量：</span>
+                    <input class="show-text" type="tel" placeholder="添加数量" ng-model="views.laundryBind.numEquipment" maxlength="6"/>
+                </label>
+            </div>
+            -->
+
+            <div class="padding">
+                <button class="button button-block button-positive" ng-click="views.updateLaundry()">{{views.isEdit ? '创建' : '保存'}}</button>
+            </div>
+        </form>
+    </ion-content>
+    <div area-full ng-if="views.isShowArea" on-select="views.selectedArea($event)" select-level="2"></div>
+</ion-view>
