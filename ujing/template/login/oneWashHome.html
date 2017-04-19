@@ -1,0 +1,30 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg one-wash-home" cache-view="false">
+    <div ng-if="views.isNear && !views.isFirst">
+        <ion-header-bar class="ujing-header">
+            <!--<a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="views.backWay()"></a>-->
+            <h1 class="title">选择附近洗衣房</h1>
+            <a class="icon icon-richscan right" ng-click="views.scanningCode()" style="left: 0; right: 15px;"></a>
+        </ion-header-bar>
+        <!-- 副标题 搜索 -->
+        <div class="bar bar-subheader search-block">
+            <div class="search-input" ng-click="views.showSearch()"><i class="icon-search"></i>输入洗衣房名称</div>
+        </div>
+        <ion-content class="near-room has-search-input" scrollbar-y="false">
+            <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.refresh()"></ion-refresher>
+            <wash-list class="transparent-animation" send-data="item" click-fun="views.directoryBack(item)" ng-repeat="item in views.storeList track by $index"></wash-list>
+            <div class="spacing-padding"></div>
+        </ion-content>
+
+        <div class="not-data-tips" ng-if="views.isRequest && views.storeList.length === 0"><i class="tips-img"></i><p>附近没有洗衣房信息~~</p></div>
+    </div>
+
+    <div class="way" ng-if="views.isNear && views.isFirst">
+        <div class="way-type">
+            首次使用，我需要......
+            <a class="btn-way" href="javascript:;" ng-click="views.showList()">找到附近的洗衣房</a>
+            或者
+            <a class="btn-way" href="javascript:;" ng-click="views.scanningCode()">就在机器旁？我要扫码</a>
+        </div>
+    </div>
+</ion-view>

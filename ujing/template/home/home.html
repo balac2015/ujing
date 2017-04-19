@@ -1,0 +1,130 @@
+<ion-view can-swipe-back="false" class="home" cache-view="true">
+    <ion-header-bar class="ujing-header">
+        <a class="icon icon-richscan" ng-click="views.scanningCode()"></a>
+        <h1 class="title">U净</h1>
+        <a class="icon icon-message" ng-class="{'active': isMessage}" ng-click="views.directoryBack('message')"></a>
+    </ion-header-bar>
+    <div class="bar bar-subheader layout-between" ng-click="views.directoryBack('list')">
+        <h2 class="left">{{views.store.name}}</h2>
+        <a class="right">
+            <i class="icon ion-chevron-down"></i> 切换
+        </a>
+    </div>
+    <div class="tips-box tips-error no-border-top" ng-if="views.isMalDevice" ng-click="views.detailMalDevice()">
+        <i class="icon warning-red"></i>抱歉，您所使用的机器现在出现了故障。
+        <i class="icon arrow-right-red"></i>
+    </div>
+
+    <!-- ion-tabs 后 directivesTpl 替换-->
+    <ion-content class="home-device" ng-class="{'has-maldevice': views.isMalDevice}" scrollbar-y="false" delegate-handle="small">
+        <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.refresh()"></ion-refresher>
+
+        <ion-tabs class="device-tabs" ng-class="{'has-maldevice': views.isMalDevice}" ng-if="views.deviceList.length > 0">
+            <ion-tab ng-if="item" ng-repeat="item in views.deviceList track by $index"
+                     title="<div class='device-name'>
+                 <span class='icon-type {{item.icon}}'></span>
+                        <span class='item-type'>
+                            <strong class='item-name'>{{item.shortName}}</strong>
+                            <span class='item-num'>剩{{item.free}}</span>
+                        </span>
+                 </div>"
+                     on-select="views.tabsToggle($index)"></ion-tab>
+        </ion-tabs>
+
+        <!--洗衣模式-->
+        <div class="model-info" ng-if=" views.deviceList[views.deviceIndex].free > 0 && views.deviceList[views.deviceIndex].washModelList.length > 0">
+            <div class="home-item" ng-repeat="item in views.deviceList[views.deviceIndex].washModelList track by $index" ng-click="views.showDescription(item, $index)">
+                <a class="item home-row">
+                    <i class="icon-model {{item.deviceWashModelId.icon}}"></i>
+
+                    <span class="item-type">
+                        <time class="time">{{item.deviceWashModelId.time + 'min'}}</time><br/>
+                        <strong class="model">{{item.deviceWashModelId.workmodel}}</strong>
+                    </span>
+
+                    <span class="item-prices">
+                        <span class="wash-prices" ng-if="!views.order.isDry"
+                              ng-class="{'promotion-price': item.promotionPrice != 0, 'normal-price': item.promotionPrice == 0}">
+                            <del class="price" >
+                                <span class="price-currency">￥</span>
+                                {{item.washPrice || item.deviceWashModelId.basePrice | currencyNumber}}
+                            </del><br/>
+                            <strong class="promotion">
+                                特惠
+                                <span class="num">
+                                    <span class="price-currency">￥</span>{{item.promotionPrice | currencyNumber}}
+                                </span>
+                            </strong>
+                        </span>
+
+                        <span class="dry-prices" ng-if="views.order.isDry"
+                              ng-class="{'promotion-price': item.promotionPrice != 0, 'normal-price': item.promotionPrice == 0}">
+                            <sup class="sup">
+                                <span class="nor-sup">
+                                    <span class="price-currency">￥</span>
+                                    <span class="prc">{{item.washPrice || item.deviceWashModelId.basePrice | currencyNumber}}</span>
+                                </span>
+                                <br ng-if="item.promotionPrice != 0">
+                                <span class="pro-sup">
+                                    特惠
+                                    <span class="price-currency">￥</span>
+                                    <span class="prc">{{item.promotionPrice || item.washPrice || item.deviceWashModelId.basePrice | currencyNumber}}</span>
+                                </span>
+                            </sup>
+                            <!--<span class="line-slash"></span>-->
+                            <sub class="sub">{{item.deviceWashModelId.time || '10'}}min</sub>
+                        </span>
+                    </span>
+
+                    <span class="item-btn">
+                        <button class="btn-reserve" ng-click=" views.reserveShow($event, item) ">预订</button>
+                    </span>
+                </a>
+                <div class="home-description" ng-if="item.isShowModel">
+                    <i class="icon icon-warning-yellow"></i>{{item.deviceWashModelId.description}}
+                </div>
+            </div>
+        </div>
+        <div class="model-info ml-30" ng-if="views.isRequest && !views.deviceList">
+            该洗衣房下暂无设备！
+        </div>
+        <!--空闲提醒-->
+        <div class="empty-info" ng-if="views.isRequest && views.deviceList[views.deviceIndex].free <= 0">
+            <div class="legend-title">
+                目前没有空闲机器，建议使用”预订提醒“
+            </div>
+            <div class="row empty-con">
+                <div class="empty-mes col col-75">
+                    <p class="mes">机器空闲时提醒我预订</p>
+                    <p class="valid">预订提醒2小时内有效</p>
+                </div>
+                <div class="empty-btn col col-25">
+                    <a class="btn-reserve" ng-click="views.setAppointmentReminder()">预订提醒</a>
+                </div>
+            </div>
+        </div>
+
+        <!--营业信息-->
+        <div class="shop-info" ng-if="views.isRequest">
+            <div class="contact">
+                <div class="contact-shop">
+                    <div class="address only-has-one-text">
+                        <i class="icon icon-place"></i>
+                        {{!views.store.address ? '-' : views.store.address}}
+                    </div>
+                    <div class="time">
+                        <i class="icon icon-shop-hours"></i>
+                        营业时间：<time>{{views.store.businessStartTime}} - {{views.store.businessEndTime}}</time>
+                    </div>
+                </div>
+                <div class="contact-tel" ng-click="views.tel()">
+                    <i class="icon icon-phone"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!--<not-data-tips ng-if="views.isRequest"></not-data-tips>-->
+        <div class="spacing-padding has-footer"></div>
+    </ion-content>
+</ion-view>

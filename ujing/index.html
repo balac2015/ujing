@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-controller="mainCtrl">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <!--
+    rem布局不需要手动指定viewport, flexible.js脚本会自动添加
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    -->
+    <title>U净洗衣</title>
+
+    <!--css-start-->
+    <!--
+    rem 布局引用ionic.rem.css而不是ionic.min.css
+    <link rel="stylesheet" href="lib/components/ionic/release/css/ionic.min.css?ver=___version___">
+    -->
+    <link rel="stylesheet" href="lib/components/ionic/release/css/ionic.rem.css?ver=___version___">
+    <!-- rem 布局不兼容component.css
+    <link rel="stylesheet" href="lib/css/component.css?ver=___version___">
+    -->
+    <link rel="stylesheet" href="lib/components/animate.css/animate.min.css?ver=___version___">
+    <!--
+    <link rel="stylesheet" href="lib/components/angular-loading-bar/build/loading-bar.min.css?ver=___version___">
+    -->
+    <link rel="stylesheet/less" type="text/css" href="css/style.less?ver=___version___"/>
+    <!--<link rel="stylesheet/less" type="text/css" href="css/ujing.less?ver=___version___"/>-->
+
+    <!--css-end-->
+
+</head>
+<body class="b-color-f2f fullscreen" ng-controller="baseCtrl">
+
+<div ng-cloak class="ng-cloak">
+    <ion-nav-view></ion-nav-view>
+    <ng-include src="'template/directivesTpl/footer.html'"></ng-include>
+</div>
+
+<script src="cordova.js?ver=___version___"></script>
+<!--js-start-->
+<script>
+    less = {
+        env: "development",
+        logLevel: 1,
+        async: false,
+        fileAsync: false,
+        poll: 60000,
+        functions: {},
+        dumpLineNumbers: "comments",
+        relativeUrls: false
+    };
+</script>
+<!-- rem 布局要引入flexible.js -->
+<script src="lib/components/flexible/flexible.js?ver=___version___"></script>
+
+<script src="lib/components/less/dist/less.min.js?ver=___version___"></script>
+<script>less.watch();</script>
+<script src="lib/components/requirejs/require.js?ver=___version___"></script>
+<script src="js/project/configuration.properties.js?ver=___version___"></script>
+<script src="lib/js/config.require.min.js?ver=___version___"></script>
+<script src="lib/dagger/js/dagger.config.js?ver=___version___"></script>
+<script src="js/main.js?ver=___version___"></script>
+<!--js-end-->
+<script src="js/phone.js?ver=___version___"></script>
+</body>
+</html>

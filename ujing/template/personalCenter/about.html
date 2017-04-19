@@ -1,0 +1,28 @@
+<!--关于U净-->
+<ion-view can-swipe-back="false" class="ujing-bg my-personal" cache-view="true">
+    <ion-content class="near-room" scrollbar-y="false" has-bouncing="false">
+        <header>
+            <img class="person-img" src="./images/personal_bg.png" alt=""/>
+            <!--<a class="icon icon-message" ng-click="jump('message', {source: ''})"></a>-->
+            <a class="icon icon-back" ng-click="goBack()"></a>
+            <div class="head-content" ng-click="views.goPersonalMsg()">
+                <div class="head-img">
+                    <img ng-class="{'has-head-img': views.hasHeadImg}" src="./images/logo.jpg" alt=""/>
+                </div>
+                <p class="tel">U净Version{{views.version}}</p>
+            </div>
+        </header>
+
+        <div class="content-list">
+         <!--   <div class="content-item" ng-click="views.score()">
+                <span>去评分</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>-->
+            <!--<div class="border-line ml-15"></div>-->
+            <div class="content-item" ng-click="jump('introduction')">
+                <span>新版介绍</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

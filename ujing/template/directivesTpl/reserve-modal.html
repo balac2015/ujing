@@ -1,0 +1,33 @@
+<!--更换模板-->
+<ion-modal-view class="no-bg">
+    <div class="reserve-box">
+        <div class="btn-box">
+            <button class="btn-cancel" ng-click="views.reserveRemove() "></button>
+        </div>
+        <div class="row reserve-item">
+            <i class="icon-reserve {{views.order.icon}}"></i>
+            <div class="item-type">
+                <p class="intro">预订机器：{{ views.order.shortName + views.order.workmodel}}</p>
+                <p class="intro">已选：<span class="light">{{views.order.slideTime}}</span></p>
+            </div>
+            <div class="item-price">
+                {{views.order.payPrice | currency:'￥'}}
+            </div>
+        </div>
+        <div class="reserve-tips">
+            <i class="icon icon-warning-yellow"></i>预订确定后请于5分钟内到达洗衣房并完成支付。
+        </div>
+        <p class="slide-title" ng-show="views.order.isDry">
+            请滑动选择干衣时间<span class="color-gray">（每{{views.order.time}}分钟{{views.order.promotionPrice || views.order.basePrice}}元）</span>
+        </p>
+        <div class="slide-box" ng-show="views.order.isDry">
+            <div class="swiper-container swiper-level-container block-center">
+                <div class="swiper-wrapper row no-p no-m">
+                    <div class="swiper-slide slide-item no-p no-m transparent-animation" ng-repeat="item in views.order.slideList track by $index">{{item}}</div>
+                </div>
+                <div class="swiper-level-pagination ng-hide"></div>
+            </div>
+        </div>
+        <button class="btn-sure" ng-click="views.reservePay()">确定</button>
+    </div>
+</ion-modal-view>

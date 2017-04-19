@@ -1,0 +1,22 @@
+{
+    "dependencies":{},
+    "hidden":false,
+    "autoDownload":true,
+    "relatesTo":[],
+    "dependsOn":[],
+    "dependsTo":[],
+    "releaseNote":"MSD",
+    "build":1,
+    "tplPath":"angular/template-co",
+    "parentFolder":"media-laundry",
+    "appFolder":"ujing",
+    "name":"U净APP",
+    "identifier":"com.midea.msd.UJing",
+    "localPath":"",
+    "action":"",
+    "index":"index.html",
+    "isPcTest":0,
+    "isDebug":1,
+    "version":"1.0.1",
+    "testVersion":"1.4.29"
+}

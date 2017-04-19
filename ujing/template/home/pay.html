@@ -1,0 +1,79 @@
+<!--支付订单-->
+<ion-view can-swipe-back="false" class="ujing-bg pay">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="jump('order')"></a>
+        <h1 class="title">支付订单</h1>
+    </ion-header-bar>
+    <ion-content class="pay">
+
+        <!--支付倒计时-->
+        <div class="row tips-box tips-warring" ng-if="views.orderStatus == 10">
+            请在 <remain-text change-time="{{views.payTime}}" over-handler="views.remainHandlerPay()"></remain-text> 内完成订单，晚了机器就没有了哦。
+        </div>
+        <div class="row tips-box tips-warring" ng-if="views.orderStatus == 20">
+            <remain-text change-time="{{5}}" over-handler="views.remainHandlerPay()"></remain-text> 后将返回订单页面！
+        </div>
+
+        <!--todo:待删-->
+        <!--启动倒计时-->
+<!--
+        <div class="row tips-box tips-warring" ng-if="views.orderStatus == 20">
+            剩余启动时间：<remain-text change-time="{{views.startTime || 600}}" over-handler="views.timeOutStart()"></remain-text>
+        </div>
+
+        <div class="row tips-box tips-warring" ng-if="views.orderStatus == 30">
+            简自洁剩余时间：<remain-text change-time="{{views.cleanTime}}" over-handler="views.timeOutClean()"></remain-text>
+        </div>
+-->
+        <!--支付返回状态-->
+        <div class="pay-status" ng-if="views.orderStatus >= 20">支付成功！</div>
+
+        <!--支付订单信息-->
+        <div class="order-status" ng-if="views.order.deviceTypeName">
+            <div class="item-wrap" ng-class=" {'drum': views.order.deviceTypeName === '滚筒机', 'pulsator': views.order.deviceTypeName === '波轮机', 'dry': views.order.deviceTypeName === '干衣机'} ">
+                <p class="engine"><strong>{{ views.order.deviceTypeName }}<span class="engine-id">&nbsp;{{'NO.' + views.order.deviceNo}}</span>{{views.order.workModle}}</strong>&nbsp;<span class="unit">{{views.order.washTime}}min</span></p>
+                <p class="address">{{views.order.address}}</p>
+                <!--<strong class="order-price">{{(views.order.promotionPrice || views.order.washPrice) | currency:'￥'}}</strong>-->
+                <strong class="order-price">{{views.order.payPrice | currency:'￥'}}</strong>
+            </div>
+        </div>
+
+        <!--支付-->
+        <div ng-if="views.orderStatus == 10">
+            <a href="javascript:;" class="select-coupon" ng-click="views.goCoupon('coupon', 'pay')">
+                优惠券
+            <span class="item-btn">
+                {{views.coupon.show}}<i class="icon ion-ios-arrow-right"></i>
+            </span>
+            </a>
+            <!--支付方式-->
+            <ion-list class="pay-way" ng-if="!views.isPayZero">
+                <ion-radio ng-repeat="item in views.payWayList track by $index"
+                           ng-class=" item.clsName "
+                           ng-value="item.value"
+                           ng-model="views.payType"
+                           ng-change=" views.payWayChange(item)"
+                           name="pay-way">{{item.text }}</ion-radio>
+            </ion-list>
+            <div class="spacing-padding">
+                <button class="btn-large btn-blue" ng-click="views.onPay()">确认支付 <span class="pay-price">{{views.payValue | currency:'￥'}}</span></button>
+            </div>
+        </div>
+
+    </ion-content>
+    <!--支付成功后-->
+    <div class="pay-over" ng-if="views.orderStatus >= 20">
+        <button class="btn-large btn-white"  ng-click="jump('order')">确定返回</button>
+<!--
+        <span ng-if="!views.isDryLaundry">我们提供</span>
+        <button class="btn-large"
+                ng-if="!views.isDryLaundry"
+                ng-class="{'btn-gary': views.orderStatus >= 35, 'btn-blue': views.orderStatus == 20 || views.orderStatus == 30}"
+                ng-click="views.onClear()">免费筒自洁</button>
+        <span ng-if="!views.isDryLaundry">或者</span>
+        <button class="btn-large btn-white"  ng-click="views.onStart()">直接启动{{views.isDryLaundry ? '烘衣' : '洗衣'}}</button>
+        -->
+    </div>
+    <not-data-tips ng-if="!views.order.deviceTypeName && views.isRequest"></not-data-tips>
+</ion-view>
+

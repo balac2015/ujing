@@ -1,0 +1,13 @@
+<a class="wash-list row item" ng-click="clickFun(sendData)">
+    <div class="col col-80 no-p">
+        <p class="only-has-one-text name">{{sendData.name}}</p>
+        <p class="no-m near-status">
+            <span class="first-child">洗：<b class="near-number">{{sendData.freeWasher}}</b>台空闲</span>
+            <span>干：<b class="near-number">{{sendData.freeDrier}}</b>台空闲</span>
+        </p>
+    </div>
+    <div class="col col-20 text-right distance">
+        {{sendData.distance | formatDistance}}
+        <b class="icon ion-ios-arrow-right"></b>
+    </div>
+</a>

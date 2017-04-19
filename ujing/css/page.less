@@ -1,0 +1,132 @@
+// 页面样式
+
+// oneWashHome.html 搜索洗衣房
+.search-block {
+  .setI(top, 88);
+  .setI(height, 88);
+  .setI(padding-left, 20);
+  .setI(padding-right, 20);
+  .setI(padding-top, 14);
+  .setI(padding-bottom, 12);
+  box-sizing: border-box;
+  background-color: @input-bg;
+  .search-input {
+    padding-top: 0;
+    padding-bottom: 0;
+    .setI(padding-left, 30);
+    .setI(padding-right, 30);
+    width: 100%;
+    .setI(height, 60);
+    .setI(border-radius, 50);
+    .setI(line-height, 60);
+    .setI(font-size, 26);
+    color: @gray-85;
+    background-color: @c-white;
+    text-align: center;
+    .icon-search {
+      .setI(margin-right, 10);
+      .setI(font-size, 26);
+    }
+  }
+  i {
+    color: @gray-85;
+  }
+}
+
+// oneWashHome.html, list.html
+.near-room {
+  .setI(top, 176);
+  background-color: @white;
+}
+
+// oneWashHome.html 入口方式
+.way {
+  width: 100%;
+  height: 100%;
+  background: transparent url('../images/way_2x.png') no-repeat center top;
+  background-size: 100% 100%;
+
+  .way-type {
+    position: absolute;
+    .set(bottom, 160);
+    width: 100%;
+    .fs(22);
+    text-align: center;
+    line-height: 2;
+    color: @black-alpha3;
+  }
+  .btn-way {
+    display: block;
+    .set(height, 80);
+    .margin-a(15);
+    .fs(32);
+    .set(line-height, 80);
+    color: @black;
+    background: transparent url('../images/btn_line_2x.png') no-repeat center center;
+    background-size: 100% 100%;
+    &.activated {
+      color: @white;
+      background-image: url('../images/btn_long_2x.png');
+    }
+  }
+}
+
+// washList.html
+.wash-list {
+  .padding-a(28);
+  border-right-width: 0;
+  .border-b(@border-color);
+  .fs(26);
+  background: @c-white !important;
+  .name {
+    .margin-b(7);
+    .fs(28);
+    color: @gray-333;
+  }
+  .near-status {
+    .fs(22);
+    color: rgba(0,0,0,.4);
+    .first-child {
+      .margin-r(40);
+    }
+  }
+  .near-number {
+    .margin-a(10);
+    .fs(28);
+    color: #f5a623;
+  }
+  .distance {
+    position: relative;
+    .padding-a(25);
+    .padding-r(10);
+    .padding-l(0);
+    .fs(26);
+    color: rgba(0,0,0,.5);
+    b {
+      .fs(32);
+      text-align: center;
+      &:before {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        .margin-t(-13);
+      }
+    }
+  }
+}
+
+//list.html
+.list-title {
+  .padding-a(20, 0, 15, 15);
+  .margin-a(0);
+  .border-b(@border-color);
+  .fs(28);
+  font-weight: normal;
+  color: @gary-85;
+  background-color: @bg-base;
+}
+
+.not-list-data {
+  .padding-a(20, 15);
+  color: @gray-85;
+}

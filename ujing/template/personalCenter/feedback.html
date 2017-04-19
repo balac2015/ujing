@@ -1,0 +1,37 @@
+<!--我要吐槽-->
+<ion-view can-swipe-back="false" class="ujing-bg">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">我要反馈</h1>
+    </ion-header-bar>
+    <ion-content  class="feedback-form" delegate-handle="small" scrollbar-x="false" scrollbar-y="false">
+        <div class="feedback-area">
+            <span class="feedback-title">快速反馈</span>
+            <div class="feedback-box">
+                <ion-list class="my-list">
+                    <ion-radio class="my-radio"
+                               ng-repeat="item in views.fast track by $index"
+                               ng-value="item.value"
+                               ng-model="views.feedType"
+                               name="fast">{{item.text}}</ion-radio>
+                </ion-list>
+            </div>
+        </div>
+        <div class="feedback-area">
+            <span class="feedback-title">其它异常反馈</span>
+            <div class="feedback-box">
+                <textarea class="feedback-textarea" ng-model="views.abnormal" maxlength="200" ng-change="views.abnormalChange()" ng-disabled="views.isMaxLength" placeholder="请简要描述你的问题和意见（200 字以内）"></textarea>
+            </div>
+        </div>
+        <div class="feedback-area">
+            <span class="feedback-title">联系电话</span>
+            <div class="feedback-box">
+                <input class="feedback-input" ng-model="views.contact" type="tel" maxlength="11" placeholder="选填，便于我们与你联系"/>
+            </div>
+        </div>
+        <div class="ujing-empty">
+            <button class="btn-large btn-blue" ng-click="views.onSubmit()">提交</button>
+        </div>
+        <div style="width:100%; height: 100px;"></div>
+    </ion-content>
+</ion-view>

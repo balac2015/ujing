@@ -1,0 +1,26 @@
+<!--免费筒自洁-->
+<ion-view can-swipe-back="false" class="ujing-bg pay">
+    <ion-header-bar class="ujing-header">
+        <a href="javascript:;" class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="jump('order')"></a>
+        <h1 class="title">{{views.title}}</h1>
+        <a class="icon icon-message"ng-class="{'active': isMessage}" ng-click="jump('message')"></a>
+    </ion-header-bar>
+
+    <ion-content>
+        <!--<div class="row tips-box tips-warring" ng-if="views.cleaning">
+            剩余启动时间：<remain-text change-time="{{views.cleanTime}}" over-handler="views.timeOutStart()"></remain-text>
+        </div>-->
+
+        <div class="pay-status" ng-if="views.orderStatus == '35'">筒自洁完成</div>
+        <!--筒自洁倒计时-->
+        <div class="remain-time" ng-if="views.orderStatus == '30'">
+            <!--<remain-circle has-canvas="false" remain-data="{{views.time || 600}}" width="125" height="125" line="6" over-handler="views.remainResult()">剩余时间</remain-circle>-->
+
+            <remain-circle has-canvas="false" remain-run="{{item.time}}" remain-amount="{{300}}" width="125" height="125" line="6" over-handler="views.remainHandlerRun($index)">剩余时间</remain-circle>
+        </div>
+
+        <div class="spacing-padding">
+            <button class="btn-large btn-gary" ng-class="{'btn-gary': views.orderStatus == '30' || views.orderStatus == '40', 'btn-blue': views.orderStatus == '35'}" ng-click="views.onStart()">返回洗衣</button>
+        </div>
+    </ion-content>
+</ion-view>

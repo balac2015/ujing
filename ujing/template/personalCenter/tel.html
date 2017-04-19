@@ -1,0 +1,21 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg" cache-view="true">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title title-center">手机号</h1>
+    </ion-header-bar>
+    <ion-content scrollbar-y="false" has-bouncing="false">
+        <!--手机号页面-->
+        <div class="set-mobile">
+            <div class="person-info">
+                <!--<div class="image"></div>-->
+                <img src="./images/phone_no_2x.png" class="image"/>
+                <div class="black-text">当前手机号 {{views.mobile}}</div>
+            </div>
+            <div class="ujing-empty">
+                <button class="btn-large btn-blue" ng-click="jump('updateMobile')">更换手机号</button>
+            </div>
+            <p class="light-text">更换后个人信息不变，下次可以使用新手机号登录</p>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,131 @@
+{
+   "configurations": {
+        "pc": "js/project/configuration.properties.js",
+        "test": "js/project/configuration_test.properties.js",
+        "product": "js/project/configuration_product.properties.js"
+   },
+   "requirejs-config": "lib/js/config.require.min.js",
+   "js-main": "js/main.js",
+   "concat-css" : [
+        "lib/components/ionic/release/css/ionic.rem.css",
+        "lib/components/animate.css/animate.min.css",
+        "build/css/style.css"
+   ],
+   "concat-css-without-lib" : [
+        "build/css/style.css"
+   ],
+   "concat-js" : [
+        "lib/components/flexible/flexible.js",
+        "lib/components/requirejs/require.js",
+        "lib/dagger/js/dagger.config.js"
+    ],
+    "lib": [
+        "lib/template/**/*",
+        "lib/dagger/**/*"
+    ],
+    "lib-js": "lib/js/main/**/*",
+    "ionic-fonts": [
+        "lib/components/ionic/release/fonts/**/*",
+        "fonts/*"
+    ],
+    "lib-images": [
+        "lib/images/**/*"
+    ],
+    "others": [
+        "**/*",
+        "!build/**/*",
+        "!css/**/*",
+        "!images/**/*",
+        "!js/**/*",
+        "!template/**/*",
+        "!svg/**/*",
+        "!out/**/*",
+        "!lib",
+        "!build.*",
+        "!*.bat",
+        "!*.zip",
+        "!*.rar",
+        "!.csslintrc",
+        "!.editorconfig",
+        "!.eslintrc",
+        "!.jscsrc",
+        "!.jshintrc",
+        "!package/**/*",
+        "!dist/**/*",
+        "!gulp.json",
+        "!gulpLoading.json",
+        "!gulpRem.json",
+        "!gulpfile.js",
+        "!builder.vbs"
+    ],
+    "paths": {
+        "jquery": "lib/components/jquery/jquery.min",
+        "angular": "lib/components/angular/angular.min",
+        "angular_animate": "lib/components/angular-animate/angular-animate.min",
+        "angular_sanitize": "lib/components/angular-sanitize/angular-sanitize.min",
+        "angular_ui_router": "lib/components/angular-ui-router/release/angular-ui-router.min",
+        "ionic": "lib/components/ionic/release/js/ionic.min",
+        "ionic_angular": "lib/components/ionic/release/js/ionic-angular.min",
+        "loading": "lib/js/main/loadingBar",
+        "i_scroll": "lib/components/iscroll/build/iscroll",
+        "ng_i_scroll": "lib/components/ng-iScroll/src/ng-iscroll.min",
+        "collide": "lib/components/collide/collide",
+        "angular_translate": "lib/components/angular-translate/angular-translate.min",
+        "angular_translate_loader_static_files": "lib/components/angular-translate-loader-static-files/angular-translate-loader-static-files.min"
+    },
+    "shim": {
+        "angular": {
+            "deps": [
+                "jquery"
+            ],
+            "exports": "angular"
+        },
+        "angular_animate": {
+            "deps": ["angular"],
+            "exports": "angular_animate"
+        },
+        "angular_sanitize": {
+            "deps": ["angular"],
+            "exports": "angular_sanitize"
+        },
+        "angular_ui_router": {
+            "deps": ["angular"],
+            "exports": "angular_ui_router"
+        },
+        "ionic": {
+            "exports": "ionic"
+        },
+        "ionic_angular": {
+            "deps": [
+                "angular",
+                "angular_animate",
+                "angular_sanitize",
+                "angular_ui_router",
+                "ionic"
+            ],
+            "exports": "ionic_angular"
+        },
+        "loading": {
+            "deps": ["angular"],
+            "exports": "loading"
+        },
+        "ng_i_scroll": {
+            "deps": [
+                "angular",
+                "i_scroll"
+            ],
+            "exports": "ng_i_scroll"
+        },
+        "collide": {
+            "exports": "collide"
+        },
+        "angular_translate": {
+            "deps": ["angular"],
+            "exports": "angular_translate"
+        },
+        "angular_translate_loader_static_files": {
+            "deps": ["angular", "angular_translate"],
+            "exports": "angular_translate_loader_static_files"
+        }
+    }
+}

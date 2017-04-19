@@ -1,0 +1,35 @@
+<!--消息-->
+<ion-view can-swipe-back="false" class="message">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">{{views.messageItem.type | messageType}}</h1>
+        <!--<a class="rule-right" ng-click="views.onShare()">分享</a>-->
+    </ion-header-bar>
+    <ion-content scrollbar-y="false" class="share">
+        <!--活动消息-->
+        <div class="message-card transparent-animation activity-detail" ng-if="views.messageItem.type == 10 || views.messageItem.type == 0">
+            <div class="message-content">
+                <div class="dir-column">
+                    <strong class="gifts-title">{{views.messageItem.type | messageType}}</strong>
+                    <time class="gifts-time">{{views.messageItem.createTime | date:'yyyy-MM-dd hh:mm'}}</time>
+                </div>
+                <div class="position-r message-pic-father" ng-if="messageItem.coverImage">
+                    <img class="message-pic" ng-src="{{views.baseUrl + messageItem.coverImage}}"/>
+                </div>
+                <p class="description only-has-two-text mt-10" ng-bind-html="views.messageItem.content"></p>
+            </div>
+        </div>
+
+        <!--推荐有奖-->
+        <div class="share-content" ng-if="views.messageItem.type == 32 || views.paySuccessShare">
+            <div class="image">
+                <img src="./images/share.jpg" ng-src="{{views.messageItem.img[0]}}" alt="item.title">
+            </div>
+            <div class="content">{{views.messageItem.content}}</div>
+            <div class="spacing-padding">
+                <button class="btn-large btn-blue" ng-click="views.onShare('qq')">分享给朋友</button>
+            </div>
+        </div>
+    </ion-content>
+
+</ion-view>

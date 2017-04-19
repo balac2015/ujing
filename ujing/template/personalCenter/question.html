@@ -1,0 +1,21 @@
+<!--常见问题-->
+<ion-view can-swipe-back="false" class="ujing-bg my-personal" cache-view="true">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">常见问题</h1>
+    </ion-header-bar>
+    <ion-content class="near-room" scrollbar-y="false" has-bouncing="false">
+        <div class="content-list question-con">
+            <div class="describe transparent-animation" ng-repeat="item in views.questionList track by $index" ng-click="views.toView($index)">
+                <div class="content-item">
+                    <span>{{item.question}}</span>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </div>
+                <div class="describe-con" ng-if="$index === views.showIndex">{{item.answer}}</div>
+            </div>
+        </div>
+        <div class="ujing-empty">
+            <button class="btn-large btn-blue" ng-click="jump('feedback')">我要反馈</button>
+        </div>
+    </ion-content>
+</ion-view>

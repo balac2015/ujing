@@ -1,0 +1,108 @@
+<!--我的订单-->
+<ion-view class="order" cache-view="true" can-swipe-back="false">
+    <ion-header-bar class="ujing-header">
+        <h1 class="title">我的订单</h1>
+        <a href="javascript:;" class="icon icon-message" ng-class="{'active': isMessage}" ng-click="views.jumpCheckLogin('message')"></a>
+    </ion-header-bar>
+    <ion-tabs class="orders"><!--tabs-icon-only-->
+        <ion-tab title="进行中">
+            <!--进行中-->
+            <ion-view class="top-92">
+                <ion-content class="mb-footer" scrollbar-y="false" delegate-handle="mainScroll">
+                    <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.onfresh(0)"></ion-refresher>
+
+                    <!--进行中，故障中、待启动列表-->
+                    <ion-list class="has-swipe transparent-animation">
+                        <ion-item class="mt-30" ng-repeat="item in views.orderList track by $index | orderBy: 'washLeftTime'">
+                            <!--运行中-->
+                            <div class="remain-time" ng-if="item.status == '40' || item.status == '30'">
+                                <remain-circle has-canvas="false" remain-run="{{item.washLeftTime}}" remain-amount="{{item.washTime * 60}}" width="125" height="125" line="6" over-handler="views.remainHandlerRun($index)">剩余时间</remain-circle>
+                            </div>
+
+                            <!--待支付、待启动显示剩余时间-->
+                            <div class="row engine-intro warning-intro" ng-if="item.status == '10'">
+                                订单剩余支付时间
+                                 <remain-text change-time="{{item.washLeftTime}}" over-handler="views.remainHandlerPay($index)"></remain-text>
+                            </div>
+
+                            <div class="row engine-intro warning-intro" ng-if="item.status == '20'">
+                                订单剩余启动时间
+                                <remain-text change-time="{{item.washLeftTime}}" over-handler="views.remainHandlerStart(item.orderId, 'cancelOrder', $index)"></remain-text>
+                            </div>
+
+                            <div class="order-status">
+                                <div class="item-status">
+                                    <!--运行中、待启动：.status-run，故障中：.status-fault-->
+                                    <strong class="status-run" ng-class="{'status-fault': item.status == '60', 'status-run': (item.status == '10' || item.status == '40')}">{{item.status | orderStatus:item.workModle}}</strong>
+                                    <p>订单号：{{item.orderNo}}</p>
+                                </div>
+                                <div class="item-wrap">
+                                    <i class="machine-bg"></i>
+                                    <div class="content">
+                                        <p class="engine"><strong>{{item.deviceTypeName}}<span class="engine-id">{{' NO.' + item.deviceNo + ' '}}</span>{{item.workModle}}</strong>&nbsp;<span class="unit">{{item.washTime}}min</span></p>
+                                        <p class="address">{{item.address}}</p>
+                                    </div>
+                                    <a class="handler" href="javascript:;" ng-if="item.status < 40" ng-click="views.cancelOrder(item, $index)">取消订单</a>
+                                </div>
+                                <div class="item-deal">
+                                    <button class="btn btn-fault" ng-if="item.status == 10" ng-click="views.switchDevice(item, $index)">换机器</button>
+                                    <button class="btn btn-downtime" ng-if="item.status == 10" ng-click="views.payStart(item)">支付</button>
+                                    <button class="btn btn-fault" ng-if="item.status == 20 && item.deviceTypeName.indexOf('干衣') === -1" ng-click="views.startSelfClean(item)">免费筒自洁</button>
+                                    <button class="btn btn-downtime" ng-if="item.status == 20 || item.status == 35" ng-click="views.startWash(item)">启动</button>
+                                    <button class="btn btn-fault" ng-if="item.status >= 54" ng-click="views.getErrorDetail(item)">故障处理</button>
+                                    <button class="btn btn-downtime" ng-if="item.status == 40 || item.status >= 54" ng-click="views.stopDevice(item)">紧急停机</button>
+                                </div>
+                            </div>
+                        </ion-item>
+                        <div class="spacing-padding has-footer"></div>
+                    </ion-list>
+                </ion-content>
+                <not-data-tips ng-if="views.orderList.length === 0 && views.isOrderRequest"></not-data-tips>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="历史订单">
+            <!-- 标签 2 内容 -->
+            <ion-view class="top-92">
+                <ion-content class="mb-footer" scrollbar-y="false" delegate-handle="small">
+                    <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.onfresh(1)"></ion-refresher>
+                    <!--历史订单-->
+                    <ion-list>
+                        <ion-item class="item-remove-animate order-record" ng-repeat="item in views.historyList track by $index">
+                            <div class="order-status">
+                                <div class="item-status">
+                                    <strong class="status-success">{{item.status | orderStatus:item.workModle}}</strong>
+                                    <p class="status-time">{{'完成时间' + item.completeTime}}</p>
+                                    <p>订单号：{{item.orderNo}}</p>
+                                </div>
+                                <div class="item-wrap position-r">
+                                    <!--<i class="machine-bg"></i>-->
+                                    <i class="icon-history" ng-class="{'standard-wash': item.workModle === '标准洗',
+                                        'fast-wash': item.workModle === '快速洗',
+                                        'big-wash': item.workModle === '大件洗',
+                                        'single-wash': item.workModle === '单脱水',
+                                        'super-dry': item.workModle === '超强烘',
+                                        'ordinary-dry': item.workModle === '普通烘',
+                                        'standard-dry': item.workModle === '标准烘'}"></i>
+                                    <div class="content">
+                                        <p class="engine"><strong>{{item.deviceTypeName}}<span class="bold">{{' NO.' + item.deviceNo + ' '}}</span>{{item.workModle}}</strong>&nbsp;<span class="unit">{{item.washTime}}min</span></p>
+                                        <p class="address">{{item.address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--待启动时可删除-->
+                            <ion-option-button class="button-assertive" ng-click="views.deleteOrder(item, $index)">
+                                <i class="icon ion-trash-a"></i>
+                            </ion-option-button>
+                        </ion-item>
+                    </ion-list>
+
+                    <div class="spacing-padding has-footer"></div>
+                    <ion-infinite-scroll ng-if="views.isNotMoreData" icon="ion-loading-c" on-infinite="views.onfresh(2)"></ion-infinite-scroll>
+                </ion-content>
+                <not-data-tips ng-if="views.historyList.length === 0 && views.isHistRequest"></not-data-tips>
+            </ion-view>
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

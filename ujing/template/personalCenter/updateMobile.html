@@ -1,0 +1,26 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg" cache-view="true">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title title-center">修改个人信息</h1>
+    </ion-header-bar>
+    <ion-content scrollbar-y="false" has-bouncing="false">
+        <!--更换手机号-->
+        <form class="update-mobile">
+            <label class="layout-between">
+                <span>手机号码：</span>
+                <input class="layout-grow" type="tel" placeholder="请输入手机号码" ng-model="views.newMobile"/>
+            </label>
+            <div class="layout-around">
+                <span>验证码：</span>
+                <input class="center" type="tel" placeholder="请输入验证码" ng-model="views.verifyCode"/>
+                <div class="right" ng-click="views.getVerification($event)">
+                    <button class="btn">{{views.btnText}}</button>
+                </div>
+            </div>
+            <div class="ujing-empty">
+                <button class="btn-large btn-blue" ng-click="views.postVerification()">验证</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

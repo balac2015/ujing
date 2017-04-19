@@ -1,0 +1,62 @@
+<!--优惠券-->
+<ion-view can-swipe-back="false">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">设置</h1>
+    </ion-header-bar>
+    <ion-content>
+        <!--新消息设置-->
+        <div class="set-message">
+            <div class="layout-between" ng-click="views.setReceive()">
+                <span class="left">接收新消息</span>
+                <span class="light-text">{{views.isReceive ? '已开启' : '已关闭'}}</span>
+            </div>
+            <!--
+            <p class="light-text">请在IPHONE的“设置” - “通知” 功能中更改！</p>
+            <ul class="list">
+                <li class="item item-toggle">
+                    通知显示消息内容
+                    <label class="toggle" ng-click="views.setMessage()">
+                        <input type="checkbox" ng-model="views.isMessage">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+                <li class="item item-toggle">
+                    夜间防骚扰模式
+                    <label class="toggle" ng-click="views.setAnti()">
+                        <input type="checkbox" ng-model="views.isAnti">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+            <p class="light-text">开启夜间防骚扰模式自动屏蔽23:00-08:00间的任何提醒</p>
+            <ul class="list">
+                <li class="item item-toggle">
+                    声音提醒
+                    <label class="toggle" ng-click="views.setSound()">
+                        <input type="checkbox" ng-model="views.isSound">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+                <li class="item item-toggle">
+                    震动提醒
+                    <label class="toggle" ng-click="views.setShock()">
+                        <input type="checkbox" ng-model="views.isShock">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+            <p class="light-text">当软件运行时，你可以设置是否需要声音或者震动提醒</p>
+            -->
+        </div>
+
+    </ion-content>
+</ion-view>

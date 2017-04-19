@@ -1,0 +1,71 @@
+<div class="wash-model">
+    <!--预订洗衣、扫码洗衣模式-->
+
+    <!--洗衣模式-->
+    <div class="model-list" ng-if="views.device.washModelList.length > 0">
+        <div class="item" ng-repeat="item in views.device.washModelList track by $index" ng-click="views.showDescription(item, $index)">
+            <a class="info">
+                <i class="icon-model" ng-class="{'standard-wash': item.deviceWashModelId.workmodel === '标准洗',
+                    'fast-wash': item.deviceWashModelId.workmodel === '快速洗',
+                    'big-wash': item.deviceWashModelId.workmodel === '大件洗',
+                    'single-wash': item.deviceWashModelId.workmodel === '单脱水',
+                    'standard-dry': item.deviceWashModelId.workmodel === '标准烘',
+                    'super-dry': item.deviceWashModelId.workmodel === '超强烘'}"></i>
+
+                    <span class="type">
+                        <time class="time">{{item.deviceWashModelId.time}}</time><br/>
+                        <strong class="model">{{item.deviceWashModelId.workmodel}}</strong>
+                    </span>
+                    <span class="prices" ng-class="{'item-promotion': !!item.promotionPrice && views.laundryDeviceList.shortName !== '干衣机',
+                        'item-price': !item.promotionPrice && views.laundryDeviceList.shortName !== '干衣机',
+                        'item-dry': views.laundryDeviceList.shortName === '干衣机'}">
+
+                        <del class="price"><span class="price-currency">&yen;</span>{{item.washPrice}}</del><br/>
+                        <strong class="promotion">特惠<span class="num"><span class="price-currency">&yen;</span>{{item.promotionPrice}}</span></strong>
+
+                        <sup class="sup"><span class="unit">￥</span><span class="prc">{{item.promotionPrice || item.washPrice}}</span></sup>
+                        <sub class="sub">{{'10min' || item.deviceWashModelId.time}}</sub>
+                    </span>
+                    <span class="handler">
+                        <button class="btn" ng-click=" views.reserveShow($event, item) ">预订</button>
+                    </span>
+            </a>
+            <div class="description" ng-if="item.isShowModel">
+                <i class="icon icon-warning-yellow"></i>{{item.deviceWashModelId.description}}
+            </div>
+        </div>
+    </div>
+
+    <!--空闲提醒-->
+    <div class="model-empty">
+        <div class="legend">
+            目前没有空闲机器，建议使用”预订提醒“
+        </div>
+        <div class="info">
+            <div class="empty-mes col col-80">
+                <p class="strong">机器空闲时提醒我预订</p>
+                <p class="normal">预订提醒2小时内有效</p>
+            </div>
+            <div class="handler">
+                <a class="btn" ng-click="views.setAppointmentReminder()">预订提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!--营业信息-->
+    <div class="model-shop">
+        <div class="contact">
+            <div class="address">
+                <i class="icon-place"></i>
+                {{views.device.storeId.address}}
+            </div>
+            <div class="time">
+                <i class="icon-time"></i>
+                营业时间：<time>{{views.device.storeId.businessStartTime}} - {{views.device.storeId.businessEndTime}}</time>
+            </div>
+        </div>
+        <div class="mobile" ng-click="views.tel()">
+            <i class="icon-mobile"></i>
+        </div>
+    </div>
+</div>

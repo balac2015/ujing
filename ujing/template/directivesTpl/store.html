@@ -1,0 +1,77 @@
+<ion-content class="home-device" ng-class="{'has-maldevice': views.isMalDevice, 'has-tabsDevice': views.laundryDeviceList.length > 0}" scrollbar-y="false" delegate-handle="small">
+    <!--洗衣模式-->
+    <div class="model-info" ng-if=" views.laundryDeviceList[views.laundryDeviceIndex].free > 0 && views.laundryDeviceList[views.laundryDeviceIndex].washModelList.length > 0">
+        <div class="home-item" ng-repeat="item in views.laundryDeviceList[views.laundryDeviceIndex].washModelList track by $index" ng-click="views.showDescription(item, $index)">
+            <a class="item home-row">
+                <i class="icon-model" ng-class="{'standard-wash': item.deviceWashModelId.workmodel === '标准洗',
+                    'fast-wash': item.deviceWashModelId.workmodel === '快速洗',
+                    'big-wash': item.deviceWashModelId.workmodel === '大件洗',
+                    'single-wash': item.deviceWashModelId.workmodel === '单脱水',
+                    'standard-dry': item.deviceWashModelId.workmodel === '标准烘',
+                    'super-dry': item.deviceWashModelId.workmodel === '超强烘'}"></i>
+
+                    <span class="item-type">
+                        <time class="time">{{item.deviceWashModelId.time}}</time><br/>
+                        <strong class="model">{{item.deviceWashModelId.workmodel}}</strong>
+                    </span>
+                    <span class="item-prices" ng-class="{'item-promotion': !!item.promotionPrice && views.laundryDeviceList.shortName !== '干衣机',
+                        'item-price': !item.promotionPrice && views.laundryDeviceList.shortName !== '干衣机',
+                        'item-dry': views.laundryDeviceList.shortName === '干衣机'}">
+
+                        <del class="price">{{item.washPrice | currency:'￥'}}</del><br/>
+                        <strong class="promotion">特惠<span class="num">{{item.promotionPrice | currency:'￥' }}</span></strong>
+
+                        <sup class="sup"><span class="unit">￥</span><span class="prc">{{item.promotionPrice || item.washPrice}}</span></sup>
+                        <sub class="sub">{{'10min' || item.deviceWashModelId.time}}</sub>
+                    </span>
+                    <span class="item-btn">
+                        <button class="btn-small" ng-click=" views.reserveShow($event, item) ">预订</button>
+                    </span>
+            </a>
+            <div class="home-description" ng-if="item.isShowModel">
+                <i class="icon icon-warning-yellow"></i>{{item.deviceWashModelId.description}}
+            </div>
+        </div>
+    </div>
+    <div class="model-info ml-30" ng-if="views.isRequest && !views.laundryDeviceList">
+        该洗衣房下暂无设备！
+    </div>
+    <!--空闲提醒-->
+    <div class="empty-info" ng-if="views.isRequest && views.laundryDeviceList[views.laundryDeviceIndex].free <= 0">
+        <div class="legend-title">
+            目前没有空闲机器，建议使用”预订提醒“
+        </div>
+        <div class="row empty-con">
+            <div class="empty-mes col col-80">
+                <p class="mes">机器空闲时提醒我预订</p>
+                <p class="valid">预订提醒2小时内有效</p>
+            </div>
+            <div class="empty-btn col col-20">
+                <a class="btn-small" ng-click="views.setAppointmentReminder()">预订提醒</a>
+            </div>
+        </div>
+    </div>
+
+    <!--营业信息-->
+    <div class="shop-info" ng-if="views.isRequest">
+        <div class="contact">
+            <div class="contact-shop">
+                <div class="address only-has-one-text">
+                    <i class="icon icon-place"></i>
+                    {{!views.address ? '-' : views.address}}
+                </div>
+                <div class="time">
+                    <i class="icon icon-shop-hours"></i>
+                    营业时间：<time>{{views.businessStartTime | date:'hh:mm'}} - {{views.businessEndTime | date:'hh:mm'}}</time>
+                </div>
+            </div>
+            <div class="contact-tel" ng-click="views.tel()">
+                <i class="icon icon-phone"></i>
+            </div>
+        </div>
+
+    </div>
+
+    <!--<not-data-tips ng-if="views.isRequest"></not-data-tips>-->
+    <div class="spacing-padding has-footer"></div>
+</ion-content>

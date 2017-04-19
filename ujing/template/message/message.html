@@ -1,0 +1,40 @@
+<!--消息-->
+<ion-view can-swipe-back="false" class="message">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="views.retreat()"></a>
+        <h1 class="title">消息</h1>
+        <a class="rule-right" ng-click="views.onEdit()">{{views.messageList.length === 0 ? '' : (views.isShowDelete ? '取消' : '编辑')}}</a>
+    </ion-header-bar>
+    <ion-content scrollbar-y="false" delegate-handle="small">
+        <ion-refresher pulling-text="下拉刷新" refreshing-text="正在刷新中~~" on-refresh="views.loadMoreData('up')"></ion-refresher>
+
+        <div class="card message-card transparent-animation" ng-repeat="item in views.messageList track by $index" ng-click="views.handlerMessage(item)">
+            <!--除送礼活动的其他提示头-->
+            <div class="layout-between" ng-if="item.type != 10">
+                <strong class="title col-half">{{item.type | messageType}}</strong>
+                <time class="time col-half">{{item.createTime | date:'yyyy-MM-dd hh:mm'}}</time>
+            </div>
+
+            <div class="message-content">
+
+                <div class="layout-between title" ng-if="item.type == 10">
+                    <div class="gifts-title" ng-bind-html="item.title"></div>
+                    <div class="gifts-time">{{item.createTime |date:'yyyy-MM-dd hh:mm'}}</div>
+                </div>
+
+                <div class="position-r message-pic-father" ng-if="item.coverImage">
+                    <img class="message-pic" ng-src="{{views.baseUrl + item.coverImage}}" alt="item.title"/>
+                </div>
+
+                <p class="summer" ng-class="{'only-has-two-text': item.img && item.img.length > 0, 'mt-10': item.coverImage}" ng-bind-html="item.content"></p>
+            </div>
+            <div class="layout-between bg-dashed">
+                <a class="del" ng-click="views.deleteMessage($event, item._id, $index)" ng-class="{'col-half': views.isShowDelete}">{{views.isShowDelete ? '删除' : ''}}</a>
+                <a class="link col-half" href="javascript:;">{{item.type | messageType:'handler'}}</a>
+            </div>
+        </div>
+
+        <ion-infinite-scroll ng-if="views.isNotMoreData" icon="ion-loading-c" on-infinite="views.loadMoreData('down')"></ion-infinite-scroll>
+    </ion-content>
+    <not-data-tips ng-if="views.messageList.length === 0 && views.isRequestData"></not-data-tips>
+</ion-view>

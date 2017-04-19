@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-controller="mainCtrl">
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>领取优惠券</title>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+            font-size: 100%;
+            background-color: #fff;
+            -webkit-overflow-scroll: touch;
+        }
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a:focus {
+            outline-width: 0;
+        }
+        input {
+            border-width: 0;
+        }
+        input:focus {
+            border-width: 0;
+            outline-width: 0;
+        }
+        input[type="number"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+            -webkit-appearance: none !important;
+            -webkit-transform: translate3d(0, 0, 0);
+        }
+        ::-webkit-input-placeholder {
+            text-align: center;
+        }
+        :-moz-placeholder {
+            text-align: center;
+        }
+        ::-moz-placeholder {
+            text-align: center;
+        }
+        :-ms-input-placeholder {
+            text-align: center;
+        }
+        .get-coupon {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding-top: 230px;
+        }
+        .get-coupon:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 230px;
+            background: #fff url('images/get_coupon.png') no-repeat center top;
+            background-size: 100% 100%;
+        }
+
+        .get-coupon:after {
+            content: '';
+            position: absolute;
+            top: 198px;
+            left: 50%;
+            width: 65px;
+            height: 65px;
+            margin-left: -32px;
+            background: transparent url('images/login_user_2x.png') no-repeat center center;
+            background-size: 100% 100%;
+        }
+
+        .user {
+            position: relative;
+            width: 94%;
+            height: 66px;
+            padding-top: 10px;
+            margin: 40px 3% 30px;
+            border: 1px solid rgba(151, 151, 151, 0.3);
+            font-size: 12px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.5);
+        }
+        [data-drp="2"] .user {
+            font-size: 24px;
+        }
+        [data-drp="3"] .user {
+            font-size: 36px;
+        }
+        .user:before, .user:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            margin-left: -7px;
+            border: 7px solid transparent;
+        }
+        .user:before {
+            margin-top: -14px;
+            border-bottom-color: rgba(151, 151, 151, 0.3);
+        }
+        .user:after {
+            margin-top: -13px;
+            border-bottom-color: #fff;
+        }
+        .user .give {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            font-weight: 500;
+            color: #000;
+        }
+        [data-drp="2"] .user .give {
+            font-size: 48px;
+        }
+        [data-drp="3"] .user .give {
+            font-size: 72px;
+        }
+        .link {
+            color: #4e5ec8;
+        }
+
+        .btn-full {
+            display: block;
+            width: 88%;
+            padding-top: 3.5%;
+            padding-bottom: 3.5%;
+            padding-right: 3%;
+            padding-left: 3%;
+            margin: 15px 3%;
+            background: transparent url('') no-repeat left center;
+            background-size: 100% 100%;
+        }
+        .btn-input {
+        	text-align: center;
+            background-image: url('images/btn_line_2x.png');
+        }
+        .btn-grand {
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+            background-image: url('images/btn_long_2x.png');
+        }
+        [data-drp="2"] .btn-grand {
+            font-size: 32px;
+        }
+        [data-drp="3"] .btn-grand {
+            font-size: 48px;
+        }
+        .info {
+            font-size: 11px;
+            text-align: center;
+            color: #858585;
+        }
+        [data-drp="2"] .info {
+            font-size: 22px;
+        }
+        [data-drp="3"] .info {
+            font-size: 33px;
+        }
+    </style>
+</head>
+<body>
+<div class="get-coupon">
+    <div class="user">
+        Hi，我是<span id="js-userName"></span>
+        <p class="give">送你<span class="link" id="value">1折</span>优惠券</p>
+    </div>
+    <input class="btn-full btn-input" id="js-mobile" type="number" placeholder="输入手机号码" required/>
+    <a class="btn-full btn-grand" id="js-receive">领取优惠券</a>
+    <div class="info">这是你的专属优惠，洗衣可以抵用哦</div>
+</div>
+<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
+<script>
+    function queryParam(couponString){
+        var search = location.search;
+        var reg = RegExp('[?&]'+couponString+'=([^&]+)');
+        var result = null;
+        search.replace(reg,function($1,$2){
+            result = decodeURIComponent($2);
+        });
+        return result;
+    }
+    $(function(){
+        var coupon = queryParam('coupon'),
+                user = queryParam('user'),
+                store = queryParam('store'),
+                now = new Date();
+
+        coupon = JSON.parse(coupon);
+        user = JSON.parse(user);
+        store = JSON.parse(store);
+
+        if(!coupon || !user || !store){
+            alert('sorry，数据出错！');
+            return false;
+        }
+        $('#value').html(coupon.value + '折');
+        $('#js-userName').html(user.nickname);
+        $('.get-coupon .info')
+
+        if(new Date(coupon.activityEndTime) < now){
+            alert('sorry，该券已经过期！');
+        }
+
+        var mc = /^1\d{10}$/;
+
+        $('#js-receive').click(function(e){
+            var mobile = $('#js-mobile').val();
+            if(!mc.test(mobile)){
+                alert("请输入正确手机号");
+                return false;
+            }
+            $.post('http://121.41.34.175:4000/user/receiveCoupon',{
+                mobile: mobile,
+                couponId: coupon._id,
+                shareUserId: user.id,
+                storeId: store.id
+            }, function(data){
+                if(data.result == '1'){
+                    alert('领取成功！');
+                } else {
+                    alert(data.msg);
+                }
+            });
+            e.preventDefault();
+        });
+    });
+</script>
+</body>
+</html>

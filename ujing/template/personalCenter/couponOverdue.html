@@ -1,0 +1,34 @@
+<!--已过期优惠券-->
+<ion-view can-swipe-back="false" class="coupon">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">已过期优惠券</h1>
+        <!--<a href="javascript:;" class="rule-right" ng-click="jump('rule')">规则</a>-->
+    </ion-header-bar>
+    <ion-content>
+
+        <div class="card coupon-list coupon-outdated" ng-repeat="item in views.couponList track by $index">
+            <div class="coupon-price">
+                <span class="price">
+                    <b class="num">{{item.value || 0}}</b>
+                    <span class="unit">{{item.unit || ''}}</span>
+                </span>
+                <span class="dest">
+                    {{item.couponType | couponType}}
+                </span>
+            </div>
+            <div class="coupon-intro">
+                <div class="card-item coupon-con">
+                    <h4 class="intro-title">{{item.title || ''}}</h4>
+                    <p class="intro-text">
+                        仅限<span class="color-link">{{item.storeId.name}}</span>洗衣房使用，限 APP 端使用，特惠场不可用。
+                    </p>
+                </div>
+                <div class="card-item coupon-limit">
+                    <span class="color-link">有效期至：</span><time>{{item.expireDate | date:'yyyy-mm-dd'}}</time>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <not-data-tips ng-if="views.couponList.length === 0 && views.isRequest"></not-data-tips>
+</ion-view>

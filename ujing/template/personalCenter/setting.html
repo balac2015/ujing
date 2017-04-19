@@ -1,0 +1,34 @@
+<!--优惠券-->
+<ion-view can-swipe-back="false" class="coupon">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title">设置</h1>
+    </ion-header-bar>
+    <ion-content class="setting">
+        <div class="layout-between set-item" ng-click="jump('tel')">
+            <span class="left">手机号</span>
+            <span class="light-text">{{views.mobile}}<i class="icon ion-ios-arrow-right"></i></span>
+        </div>
+
+        <div class="content-list">
+            <div class="content-item" ng-click="jump('newMsgSetting')">
+                <span>新消息设置</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+            <!--<div class="border-line ml-15"></div>-->
+            <!--<div class="content-item" ng-click="settings('clear')">-->
+            <!--<span>清除缓存</span>-->
+            <!--<i class="icon ion-ios-arrow-right"></i>-->
+            <!--</div>-->
+        </div>
+        <div class="content-list">
+            <div class="content-item" ng-click="jump('about')">
+                <span>关于我们</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="ujing-empty">
+            <button class="btn-large btn-white" ng-click="views.leaving()">退出登录</button>
+        </div>
+    </ion-content>
+</ion-view>

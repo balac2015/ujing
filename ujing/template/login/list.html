@@ -1,0 +1,37 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg my-wash-list" cache-view="false">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title title-center">选择附近洗衣房</h1>
+    </ion-header-bar>
+    <!-- 副标题 搜索 -->
+    <div class="bar bar-subheader search-block">
+        <div class="search-input" ng-click="views.showSearch()"><i class="icon-search"></i>输入洗衣房名称</div>
+    </div>
+    <ion-content class="near-room has-search-input" scrollbar-y="false">
+         <!--定位-更换-->
+        <a class="wash-list row item address">
+            <div class="col no-p only-has-one-text address-item">
+                当前定位：{{views.address}}
+            </div>
+            <!--<div class="address-refresh" ng-click="views.refreshAdress()">-->
+                <!--<i class="icon-refresh"></i>-->
+            <!--</div>-->
+            <!-- todo: 更换地图功能暂时取消-->
+            <!--
+            <div class="col col-20 text-right distance no-p">
+                <span class="replace">更换</span>
+                <b class="icon ion-ios-arrow-right"></b>
+            </div>
+            -->
+        </a>
+
+        <h3 class="list-title margin-t-40" ng-if="views.recentlyUsedStoreList.length > 0">最近使用的洗衣房</h3>
+        <wash-list class="transparent-animation recently-store" send-data="item" ng-repeat="item in views.recentlyUsedStoreList track by $index" click-fun="views.directoryBack(item)" ng-if="$index < 3"></wash-list>
+        <!--<p class="not-list-data" ng-if="views.recentlyUsedStoreList.length == 0">暂无记录~~</p>-->
+        <h3 class="list-title margin-t-40">附近洗衣房</h3>
+        <wash-list class="transparent-animation" send-data="item" ng-repeat="item in views.storeList track by $index"  click-fun="views.directoryBack(item)"></wash-list>
+        <p class="not-list-data" ng-if="!views.storeList || views.storeList.length === 0">附近暂无洗衣房~~</p>
+        <p></p>
+    </ion-content>
+</ion-view>

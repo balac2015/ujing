@@ -1,0 +1,51 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg my-personal" cache-view="false">
+    <ion-content class="near-room" scrollbar-y="false" has-bouncing="false">
+        <header>
+            <img class="person-img" src="./images/personal_bg.png" alt=""/>
+            <a class="icon icon-message" ng-class="{'active': isMessage}" ng-click="views.jumpCheckLogin('message')"></a>
+            <div class="head-content" ng-click="views.jumpCheckLogin('personalMsg')">
+                <div class="head-img">
+                    <img src="./images/logo.jpg" onerror="this.src='./images/logo.jpg'" ng-class="{'has-head-img': views.portrait}" ng-src="{{views.baseUrl + views.portrait}}" alt=""/>
+                </div>
+                <p class="tel">{{views.mobile}}</p>
+                <p class="name">{{views.nickname}}</p>
+            </div>
+        </header>
+        <div class="content-list">
+            <div class="content-item" ng-click="views.jumpCheckLogin('coupon')">
+                <img class="my-coupons" src="./images/my_coupons.png" alt=""/>
+                <span>我的优惠券</span>
+                <i class="tips">{{views.couponCount}}</i>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        <!--    <div class="border-line ml-15"></div>
+            <div class="content-item" ng-click="views.onShare()">
+                <img class="my-coupons" src="./images/my_coupons.png" alt=""/>
+                <span>分享有奖</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>-->
+        </div>
+        <div class="content-list">
+            <div class="content-item" ng-click="jump('feedback')">
+                <img class="my-coupons feedback" src="./images/teasing_icon.png" alt=""/>
+                <span>我要反馈</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+            <div class="border-line ml-15"></div>
+            <div class="content-item" ng-click="jump('question')">
+                <img class="my-coupons question" src="./images/group_2x.png" alt=""/>
+                <span>常见问题</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="content-list">
+            <div class="content-item" ng-click="views.jumpCheckLogin('setting')">
+                <img class="my-coupons setting" src="./images/set_2x.png" alt=""/>
+                <span>设置</span>
+                <i class="icon ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="spacing-padding has-footer"></div>
+    </ion-content>
+</ion-view>

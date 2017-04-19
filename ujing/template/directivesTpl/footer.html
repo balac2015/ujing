@@ -1,0 +1,23 @@
+<!--
+<div ng-controller="footerCtrl">
+    <ion-footer-bar class="ujing-footer" ng-if="views.isShowFooter">
+        <div class="row">
+            <a class="col" href="javascript:;" ng-repeat="item in views.footerList track by $index"
+               ng-class="{'active': views.activeNav === item}"
+               ng-click="views.toggleNav(item)">
+                <i class="icon-footer icon-home"
+                   ng-class="{'icon-home': item === 'home' || item === 'scanHome', 'icon-orders': item === 'order', 'icon-mine': item === 'personal'}"></i>
+            </a>
+        </div>
+    </ion-footer-bar>
+</div>
+-->
+<div ng-controller="footerCtrl">
+    <div class="tabs tabs-icon-only ujing-footer" ng-if="views.isShowFooter">
+        <a href="javascript:;" class="tab-item" ng-repeat="item in views.footerList track by $index" ng-click="views.toggleNav(item)">
+            <i ng-class="{'icon-home': item === 'home' || item === 'scanHome' || item === 'oneWashHome', 'icon-orders': item === 'order', 'icon-mine': item === 'personal', 'active': views.activeNav === item}"></i>
+        </a>
+    </div>
+
+</div>
+

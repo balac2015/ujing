@@ -1,0 +1,16 @@
+<!--优惠券说明-->
+<ion-view can-swipe-back="false" class="ujing-bg personal-msg" cache-view="true">
+    <ion-header-bar class="ujing-header">
+        <a class="button button-icon ion-ios-arrow-left text-left font-adjus color-white" ng-click="goBack()"></a>
+        <h1 class="title title-center">昵称</h1>
+        <a href="javascript:;" class="rule-right" ng-click="views.save()">保存</a>
+    </ion-header-bar>
+    <ion-content class="near-room" scrollbar-y="false" has-bouncing="false">
+        <div class="content-list">
+            <form class="content-item head-msg-detail">
+                <input type="text" maxlength="10" placeholder="请输入昵称" ng-model="views.nickname"/>
+                <i class="del-icon ion-ios-close" ng-click="views.value = null" ng-if="views.value"></i>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>

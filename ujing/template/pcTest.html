@@ -1,0 +1,21 @@
+<!--PC测试获取cookie-->
+<ion-view can-swipe-back="false" class="ujing-bg pay">
+    <ion-header-bar class="ujing-header">
+        <h1 class="title">PC测试获取cookie</h1>
+    </ion-header-bar>
+
+    <ion-content>
+
+        <p>第一步：获取手机验证码</p>
+        <input class="pctest-input" type="tel" placeholder="请输入手机号" style="" maxlength="11" ng-model="views.mobile"/>
+        <input type="button" value="获取验证码" ng-click="views.getVerifyCode()" style="margin:20px"/>
+        <p>第二步：验证码和手机号登录</p>
+        <input class="pctest-input" type="tel" placeholder="请输入验证码" maxlength="4" ng-model="views.verifyCode"/>
+        <input type="button" value="登录获取cookie" ng-click="views.login()" style="margin:20px"/>
+        <p>第三步， 缓存set-cookie 的session值</p>
+        <input class="pctest-input" type="tel" placeholder="粘贴session" ng-model="views.cookie"/>
+        <input type="button" value="缓存cookie" ng-click="views.setCookie()" style="margin:20px"/>
+
+
+    </ion-content>
+</ion-view>
