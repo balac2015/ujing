@@ -36,7 +36,7 @@
         "conf": "karma.conf.js",
         "enabled": false,
         "enabledForTestEnvironment": true,
-        "enabledForProductEnvironment": true,
+        "enabledForProductEnvironment": true, 
         "singleRun": false
     }
 }
